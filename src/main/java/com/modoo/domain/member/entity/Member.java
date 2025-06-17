@@ -27,4 +27,5 @@ public class Member extends BaseEntity{
                 .name(request.getName())
                 .build();
     }
+
 }
