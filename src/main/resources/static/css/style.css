@@ -1,0 +1,53 @@
+body { margin: 0; font-family: sans-serif; }
+
+.header { position: fixed; top: 0; left: 0; right: 0; height: 60px; background: white; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 1px solid #ccc; z-index: 1000; }
+
+.logo { font-weight: bold; font-size: 24px; color: #89bff6; }
+
+.region button { background: #d4e8ff; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; }
+
+.search input { width: 300px; height: 36px; border-radius: 18px; border: none; background: #eee; padding-left: 15px; }
+
+.profile { font-size: 24px; }
+
+.sidebar { position: fixed; top: 60px; left: 0; width: 200px; height: calc(100vh - 60px); background: white; border-right: 1px solid #ccc; padding: 20px; box-sizing: border-box; }
+
+.sidebar h3 { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+
+.sidebar ul { list-style: none; padding: 0; }
+
+.sidebar li { margin: 8px 0; }
+
+.sidebar a { text-decoration: none; color: #0073e6; }
+
+.main-content { margin-left: 200px; padding: 80px 20px 20px; }
+
+section { margin-bottom: 40px; }
+
+h2 { font-size: 20px; margin-bottom: 10px; }
+
+.group-list { display: flex; flex-wrap: wrap; gap: 20px; }
+
+.group {
+  width: calc(33.333% - 20px);
+  box-sizing: border-box;
+}
+
+.image-box {
+  width: 100%;
+  height: 120px;
+  background: #ccc;
+}
+
+.text-box {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.text-box p {
+  margin: 2px 0;
+}
+
+/* 반응형 - 태블릿 이하 (2개씩) */
+@media (max-width: 900px) {
+  .group { width: c

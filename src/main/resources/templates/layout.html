@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="setContent(content)">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}"/>
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link th:href="@{/css/style.css}" rel="stylesheet"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="logo">modoo</div>
+        <div class="region">
+            <button>부평구 ▼</button>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="검색어를 입력하세요"/>
+        </div>
+        <div class="profile">👤</div>
+    </header>
+
+    <!-- 사이드바 -->
+    <nav class="sidebar">
+        <h3>category</h3>
+        <ul>
+            <li><a href="#">전체</a></li>
+            <li><a href="#">카테고리 1</a></li>
+            <li><a href="#">카테고리 2</a></li>
+            <li><a href="#">카테고리 3</a></li>
+            <li>·</li>
+            <li>·</li>
+        </ul>
+    </nav>
+
+    <!-- Page content-->
+    <div class="container-fluid">
+        <th:block th:replace="${content}"></th:block>
+    </div>
+    </body>
+</th:block>
+</html>

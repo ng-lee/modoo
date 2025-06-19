@@ -1,10 +1,113 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Main Page</h1>
-</body>
+
+<th:block th:replace="~{/layout :: setContent(~{this::content})}">
+
+    <th:block th:fragment="content">
+        <!-- 메인 -->
+        <main class="main-content">
+            <section>
+                <h2>카테고리 1</h2>
+                <div class="group-list">
+                    <div class="group">
+                        <div class="image-box"></div>
+                        <div class="text-box">
+                            <p>모임명</p>
+                            <p>모임 설명</p>
+                            <p>부평구 멤버(10)</p>
+                        </div>
+                    </div>
+                    <!-- 반복 -->
+                </div>
+            </section>
+            <section>
+                <h2>카테고리 2</h2>
+                <div class="group-list">
+                    <div class="group">
+                        <div class="image-box"></div>
+                        <div class="text-box">
+                            <p>모임명</p>
+                            <p>모임 설명</p>
+                            <p>부평구 멤버(10)</p>
+                        </div>
+                    </div>
+                    <!-- 반복 -->
+                </div>
+            </section>
+            <section>
+                <h2>카테고리 3</h2>
+                <div class="group-list">
+                    <div class="group">
+                        <div class="image-box"></div>
+                        <div class="text-box">
+                            <p>모임명</p>
+                            <p>모임 설명</p>
+                            <p>부평구 멤버(10)</p>
+                        </div>
+                    </div>
+                    <!-- 반복 -->
+                </div>
+            </section>
+            <section>
+                <h2>카테고리 4</h2>
+                <div class="group-list">
+                    <div class="group">
+                        <div class="image-box"></div>
+                        <div class="text-box">
+                            <p>모임명</p>
+                            <p>모임 설명</p>
+                            <p>부평구 멤버(10)</p>
+                        </div>
+                    </div>
+                    <!-- 반복 -->
+                </div>
+            </section>
+            <section>
+                <h2>카테고리 5</h2>
+                <div class="group-list">
+                    <div class="group">
+                        <div class="image-box"></div>
+                        <div class="text-box">
+                            <p>모임명</p>
+                            <p>모임 설명</p>
+                            <p>부평구 멤버(10)</p>
+                        </div>
+                    </div>
+                    <!-- 반복 -->
+                </div>
+            </section>
+            <section>
+                <h2>카테고리 6</h2>
+                <div class="group-list">
+                    <div class="group">
+                        <div class="image-box"></div>
+                        <div class="text-box">
+                            <p>모임명</p>
+                            <p>모임 설명</p>
+                            <p>부평구 멤버(10)</p>
+                        </div>
+                    </div>
+                    <!-- 반복 -->
+                </div>
+            </section>
+            <section>
+                <h2>카테고리 7</h2>
+                <div class="group-list">
+                    <div class="group">
+                        <div class="image-box"></div>
+                        <div class="text-box">
+                            <p>모임명</p>
+                            <p>모임 설명</p>
+                            <p>부평구 멤버(10)</p>
+                        </div>
+                    </div>
+                    <!-- 반복 -->
+                </div>
+            </section>
+
+        </main>
+
+    </th:block>
+</th:block>
+
 </html>
