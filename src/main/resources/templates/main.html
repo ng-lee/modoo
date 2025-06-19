@@ -1,10 +1,663 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BIRKMAN</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link href="https://webfontworld.github.io/sandbox/SBAggro.css" rel="stylesheet">
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../static/css/reset.css">
+    <link rel="stylesheet" href="../static/css/common.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style2.css">
+    <link rel="stylesheet" href="../static/css/style3.css">
+    <link rel="stylesheet" href="../static/css/responsive.css">
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- swiper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="../static/js/jquery.rcounterup.js"></script>
+
+    <!-- counter -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="../static/js/jquery.counterup.min.js"></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="../static/js/style.js?ver=0.6"></script>
 </head>
-<body>
-    <h1>Main Page</h1>
-</body>
-</html>
+<body style="height: auto; overflow-y: visible;">
+
+
+<header class="header">
+    <div class="header_dim"></div>
+    <div class="inner">
+        <div class="gnb_bg"></div>
+        <div>
+            <h1>
+                <a href="./"><img src="/birkman/img/logo.svg" alt="BIRKMAN"></a>
+            </h1>
+            <ul class="gnb">
+                <li>
+                    <a href="./education_intro.php">버크만 솔루션</a>
+                    <ul class="sub">
+                        <li><a href="./education_intro.php">자격교육 과정 소개</a></li>
+                        <li><a href="./education_company.php">기업 솔루션 소개</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="./diagnosis_intro.php" class="short">진단 구매</a>
+                    <ul class="sub">
+                        <li><a href="./diagnosis_intro.php">버크만 진단 구매</a></li>
+                        <li><a href="./diagnosis_book.php">교구 구매</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="./comm_notice.php">커뮤니케이션</a>
+                    <ul class="sub">
+                        <li><a href="./comm_notice.php">공지사항</a></li>
+                        <li><a href="./comm_event.php">이벤트</a></li>
+                        <li><a href="./comm_blog.php">BLOG</a></li>
+                        <li><a href="./comm_faq.php">자주하는 질문</a></li>
+                        <li><a href="./service_use_info.php">맞춤 교육 문의</a></li>
+                    </ul>
+                </li>
+                <li class="small">
+                    <a href="./data_research.php">연구실</a>
+                    <ul class="sub">
+                        <li><a href="./data_research.php">연구</a></li>
+                        <li><a href="./data_material.php">자료</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="./introduction.php">회사소개</a>
+                    <ul class="sub">
+                        <li><a href="./introduction.php">버크만코리아 소개</a></li>
+                        <li><a href="./introduct_history.php">주요 연혁</a></li>
+                        <li><a href="./introduct_method.php">Birkman Method</a></li>
+                        <li><a href="./introduct_work.php">Birkman at Work</a></li>
+                        <li><a href="./education_teacher.php">강사 소개</a></li>
+                        <li><a href="./introduct_map.php">찾아오시는 길</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <ul class="side_info">
+                <li><a href="./mypage_alarm.php"><i class="icon on"><img src="/birkman/img/icon/icon_alarm.svg" alt="알림"></i>알림</a></li>
+                <li><a href="./payment_cart.php"><i class="icon on"><img src="/birkman/img/icon/icon_cart.svg" alt="장바구니"></i>장바구니</a></li>
+                <li class="my_info">
+                    <span class="tag type2 with_text">Lv.1</span>홍길동님
+                    <div class="inner_pop">
+                        <ul>
+                            <li>
+                                <a href="./mypage_intro.php">
+                                    <img src="/birkman/img/icon/icon_mypage.svg" alt="">마이페이지
+                                </a>
+                            </li>
+                            <li class="logout">
+                                <a href="./login.php">
+                                    <img src="/birkman/img/icon/icon_logout.svg" alt="">로그아웃
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <!-- <button type="button" class="btn middle round navy_btn">강사<i class="br_1280"></i> 신청</button> -->
+                    <span class="hold_tag">강사승인대기중</span>
+                </li>
+                <!-- 미로그인시 -->
+                <!--
+                <li><a href="./join.php" class="text_block">회원가입</a></li>
+                <li><a href="./login.php" class="text_block">로그인</a></li>
+                -->
+            </ul>
+        </div>
+    </div>
+</header>
+<header class="mb_header">
+    <div class="inner">
+        <button class="icon_btn hamburger_btn"><img src="/birkman/img/icon/icon_hamburger.svg" alt=""></button>
+        <h1>
+            <a href="./"><img src="/birkman/img/logo.svg" alt="BIRKMAN"></a>
+        </h1>
+        <div class="btn_right">
+            <button class="icon_btn mypage_btn"><img src="/birkman/img/icon/icon_mypage_mb.svg" alt=""></button>
+            <button class="icon_btn cart_btn"><img src="/birkman/img/icon/icon_cart_mb.svg" alt=""></button>
+        </div>
+    </div>
+</header>
+<div class="common_dim"></div>
+
+<div class="mb_only mb_nav">
+    <div class="nav_top">
+        <div class="btn_wrap flex_between">
+            <button type="button" class="alarm_btn">
+                <img src="/birkman/img/icon/icon_alarm.svg" alt="알림">
+            </button>
+            <button type="button" class="close_btn">
+                <img src="/bodychannel/img/icon/pop_close.svg" alt="닫기">
+            </button>
+        </div>
+        <div class="flex_between">
+            <ul class="devide_ul">
+                <!-- 미로그인시 -->
+                <li><a href="./login.php">로그인</a></li>
+                <li><a href="./join.php">회원가입</a></li>
+                <!-- 로그인시 -->
+                <!-- <li><a href="./login.php">로그아웃</a></li> -->
+            </ul>
+            <!-- <a href="./instructor_request.php" class="navy_t font_sb">강사신청</a> -->
+            <span class="hold_tag">강사승인대기중</span>
+        </div>
+    </div>
+    <div class="nav_bottom">
+        <ul class="mb_gnb">
+            <li>
+                <a href="javascript:;">버크만 솔루션</a>
+                <ul class="mb_sub">
+                    <li><a href="./education_intro.php">전문가교육 과정 소개</a></li>
+                    <li><a href="./education_company.php">기업 솔루션 소개</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">진단 구매</a>
+                <ul class="mb_sub">
+                    <li><a href="./diagnosis_intro.php">버크만 진단 구매</a></li>
+                    <li><a href="./diagnosis_book.php">교구 구매</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">커뮤니케이션</a>
+                <ul class="mb_sub">
+                    <li><a href="./comm_notice.php">공지사항</a></li>
+                    <li><a href="./comm_event.php">이벤트</a></li>
+                    <li><a href="./comm_blog.php">BLOG</a></li>
+                    <li><a href="./comm_faq.php">자주하는 질문</a></li>
+                    <li><a href="./service_use_info.php">맞춤 교육 문의</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">연구실</a>
+                <ul class="mb_sub">
+                    <li><a href="./data_research.php">연구</a></li>
+                    <li><a href="./data_material.php">자료</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">회사소개</a>
+                <ul class="mb_sub">
+                    <li><a href="./introduction.php">버크만코리아 소개</a></li>
+                    <li><a href="./introduct_history.php">주요 연혁</a></li>
+                    <li><a href="./introduct_method.php">Birkman Method</a></li>
+                    <li><a href="./introduct_work.php">Birkman at Work</a></li>
+                    <li><a href="./education_teacher.php">강사 소개</a></li>
+                    <li><a href="./introduct_map.php">찾아오시는 길</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">마이페이지</a>
+                <ul class="mb_sub">
+                    <li><a href="./mypage_intro.php">마이페이지 홈</a></li>
+                    <!-- <li><a href="./mypage.php">마이페이지 홈</a></li>	 -->
+                    <li><a href="./mypage_education.php">나의 교육과정</a></li>
+                    <li><a href="./mypage_diagnosis.php">진단내역 관리</a></li>
+                    <li><a href="./mypage_purchase.php">구매내역</a></li>
+                    <li><a href="./mypage_inquiry.php">1:1 문의 내역</a></li>
+                    <li><a href="./mypage_alarm.php">알림내역</a></li>
+                    <li><a href="./mypage_lecture.php">강의 관리</a></li>
+                    <li><a href="./mypage_company.php">기업정보 관리</a></li>
+                    <li><a href="./mypage_privacy.php">개인정보수정</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="pop_dim type2"></div>
+
+<script>
+    $(document).ready(function(){
+        $(".mb_header .mypage_btn").click(function(){
+            window.location.href='./mypage.php';
+        });
+        $(".mb_header .cart_btn").click(function(){
+            window.location.href='./payment_cart.php';
+        });
+    });
+</script>
+<section class="container index">
+    <div class="container_inner" style="min-height: 317.115px; position: initial;">
+        <div class="main_vsl">
+            <div class="swiper swiper-initialized swiper-horizontal swiper-ios swiper-backface-hidden">
+                <div class="swiper-wrapper" id="swiper-wrapper-c79cf3e5fb5fad8b" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-1560px, 0px, 0px);">
+                    <a href="javascript:;" class="swiper-slide" role="group" aria-label="1 / 5" style="width: 390px;">Slide 1</a>
+                    <a href="javascript:;" class="swiper-slide" role="group" aria-label="2 / 5" style="width: 390px;">Slide 2</a>
+                    <a href="javascript:;" class="swiper-slide" role="group" aria-label="3 / 5" style="width: 390px;">Slide 3</a>
+                    <a href="javascript:;" class="swiper-slide swiper-slide-prev" role="group" aria-label="4 / 5" style="width: 390px;">Slide 4</a>
+                    <a href="javascript:;" class="swiper-slide swiper-slide-active" role="group" aria-label="5 / 5" style="width: 390px;">Slide 5</a>
+                </div>
+                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet" tabindex="0">01</span><div class="slide_progress_bar page1" style="left: 207.979px;"><div class="gauge animation"></div></div><span class="swiper-pagination-bullet" tabindex="0">02</span><div class="slide_progress_bar page2" style="left: 207.979px;"><div class="gauge animation"></div></div><span class="swiper-pagination-bullet" tabindex="0">03</span><div class="slide_progress_bar page3" style="left: 207.979px;"><div class="gauge animation"></div></div><span class="swiper-pagination-bullet" tabindex="0">04</span><div class="slide_progress_bar page4" style="left: 207.979px;"><div class="gauge animation"></div></div><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" aria-current="true">05</span><div class="slide_progress_bar page5" style="left: 207.979px;"><div class="gauge animation"></div></div></div>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+        </div>
+        <div class="section2">
+            <div class="inner">
+                <ul class="list_col">
+                    <li>
+                        <div class="list_title_area">
+                            <p>버크만 진단</p>
+                            <button class="plus_btn"></button>
+                        </div>
+                        <p class="list_text ellipsis3">버크만 진단은 겉으로 드러난 행동은 물론 개인을 움직이게 하는 근본적인 동기 요소까지 밝혀내는 유일한 진단도구입니다.</p>
+                    </li>
+                    <li>
+                        <div class="list_title_area">
+                            <p>버크만 자격과정</p>
+                            <button class="plus_btn"></button>
+                        </div>
+                        <p class="list_text ellipsis3">버크만코리아 인증 <br>버크만 검사를 구입하고 해석하는 자격부여</p>
+                    </li>
+                    <li>
+                        <div class="list_title_area">
+                            <p>기업 솔루션</p>
+                            <button class="plus_btn"></button>
+                        </div>
+                        <p class="list_text ellipsis3">신입에서 퇴직 이후까지! <br>조직구성원의 경력과 특성에 맞도록 개발된 버크만 활용 교육</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="attachment">
+            <div class="section3">
+                <div class="inner center_t">
+                    <p>버크만 진단은 1940년대 말 <i class="mb_only"></i>Roger W.Birkman 박사에 의해 <i class="mb_only"></i>개발 되어 <br>70여 년간의 조사,연구를 <i class="mb_only"></i>통해 발전해온 진단입니다.</p>
+                    <button class="btn round">자세히 보기<img class="icon" src="/birkman/img/icon/icon_next_arrow.svg" alt=""></button>
+                </div>
+            </div>
+            <div class="inner section4">
+                <p class="section_title center_t">버크만 자격과정<br>
+                    <span>버크만코리아에서 제공하는 교육 프로그램을 통해 버크만 검사를 해석·활용하는 방법을 학습합니다.</span>
+                </p>
+                <ul class="course_list">
+                    <li>
+                        <p class="course_title">버크만 맛보기</p>
+                        <ul class="course_detail">
+                            <li>인식이란?</li>
+                            <li>버크만 소개</li>
+                            <li>버크만 맵과 컬러</li>
+                            <li>버크만 기호</li>
+                            <li>조직지향점</li>
+                            <li>
+                                <button type="button" class="btn full round navy_line">버크만 맛보기</button>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p class="course_title">1단계 <span>(시그니처 베이직자격)</span></p>
+                        <ul class="course_detail">
+                            <li>버크만 오리엔테이션</li>
+                            <li>버크만 메소드의 이해</li>
+                            <li>관계 프로파일링</li>
+                            <li>흥미 10가지</li>
+                            <li>직업프로파일링과 조직지향점</li>
+                            <li>
+                                <button type="button" class="btn full round">교육 신청하기</button>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p class="course_title">2단계 <span>(시그니처 프리뷰자격)</span></p>
+                        <ul class="course_detail">
+                            <li>버크만 컬러의 확장</li>
+                            <li>관계요소의 이해</li>
+                            <li>9가지 관계요소</li>
+                            <li class="bg_none">&nbsp;</li>
+                            <li class="bg_none">&nbsp;</li>
+                            <li>
+                                <button type="button" class="btn full round">교육 신청하기</button>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            이 다음<br>자격 과정은?<br>
+                            <img src="/birkman/img/icon/icon_question.svg" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="section5">
+            <div class="inner">
+                <p class="section_title center_t">기업 솔루션<br>
+                    <span>TBM프로그램은 조직의 근무경력과 상황에 따라 Birkman Mothod를 기반한 최적화된 프로그램입니다.</span>
+                </p>
+                <ul class="tab_pager">
+                    <li class="on"><a href="javascript:;">자기이해</a></li>
+                    <li><a href="javascript:;">팀빌딩</a></li>
+                    <li><a href="javascript:;">리더십</a></li>
+                    <li><a href="javascript:;">1:1 디브리핑</a></li>
+                </ul>
+                <div class="tab_wrap">
+                    <div class="tab_cont on">
+                        <p class="tab_title">자기이해</p>
+                        <p class="detail">자신의 업무스타일, 강점과 커뮤니케이션, <br>스트레스 요인 등 조직구성원의 <br>자기이해 증진을 위한 프로그램입니다.</p>
+                        <button class="btn round">자세히 보기<img class="icon" src="/birkman/img/icon/icon_next_arrow.svg" alt=""></button>
+                    </div>
+                    <div class="tab_cont">
+                        <p class="tab_title">팀빌딩</p>
+                        <p class="detail">응집력있는 팀을 위해서 리더와 구성원의 <br>니즈와 강점, 특징과 장점, 스트레스 행동 등을 <br>비교분석하여 응집력있는 팀을 향해 나아갑니다.</p>
+                        <button class="btn round">자세히 보기<img class="icon" src="/birkman/img/icon/icon_next_arrow.svg" alt=""></button>
+                    </div>
+                    <div class="tab_cont">
+                        <p class="tab_title">리더십</p>
+                        <p class="detail">리더의 위치에서 조직구성원의 임파워먼트, <br>리스크관리, 리더와 구성원의 밸런스 등을 발휘하기 위한 <br>리더의 역량강화를 위해 활용됩니다.</p>
+                        <button class="btn round">자세히 보기<img class="icon" src="/birkman/img/icon/icon_next_arrow.svg" alt=""></button>
+                    </div>
+                    <div class="tab_cont">
+                        <p class="tab_title">1:1 디브리핑</p>
+                        <p class="detail">버크만의 특장점인 컴포넌트를 통해 <br>대상자가 직면한 주제에 맞춰 한층 더 깊이 있는 <br>자기분석과 실용적인 통찰력을 제공합니다.</p>
+                        <button class="btn round">자세히 보기<img class="icon" src="/birkman/img/icon/icon_next_arrow.svg" alt=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section6">
+            <div class="inner">
+                <ul>
+                    <li>
+                        버크만 연구 기간<br>&nbsp;
+                        <p><span class="count" data-value="76">0</span>여년</p>
+                    </li>
+                    <li>
+                        버크만 진단 도입 기업수<br>(국내)
+                        <p><span class="count" data-value="198">0</span>개</p>
+                    </li>
+                    <li>
+                        양성된 버크만 전문가<br>(국내)
+                        <p><span class="count" data-value="6141">0</span>명</p>
+                    </li>
+                    <li>
+                        누적 진단 사용인원<br>(국내)
+                        <p><span class="count" data-value="303796">0</span>명</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="section7">
+            <p class="section_title center_t">고객사 사례<br>
+                <span>고객사 사례에 대한 간단한 문구가 노출됩니다.</span>
+            </p>
+            <div class="example_list">
+                <div class="swiper swiper-initialized swiper-horizontal swiper-autoheight swiper-ios swiper-backface-hidden">
+                    <div class="swiper-wrapper" id="swiper-wrapper-12de60110c10a10b582" aria-live="polite" style="transition-duration: 0ms; transform: translate3d(-583.462px, 0px, 0px); height: 420px;"><a href="javascript:;" class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="4" role="group" aria-label="5 / 6" style="width: 295.385px; margin-right: 20px;">
+                        <!-- <img src="./img/icon/icon_sponsor01.svg" alt="고객사 로고"/> -->
+                        <p class="example_company_name">Y대학교</p>
+                        <p class="title">자기이해 및 커리어 프로그램</p>
+                        <p>자신의 흥미분야와 평소행동 특징을 수치, 지표로 알 수 있어서 나에 대한 이해를 높일 수 있는 프로그램이었으며,
+                            스스로에 대해서만이 아닌 다른 이에게 어떤 식으로 상호작용할 수 있는지 배울 수 있어서 좋았습니다.</p>
+                        <!-- <p class="manager_t">인사담당 매니저</p> -->
+                    </a><a href="javascript:;" class="swiper-slide swiper-slide-duplicate swiper-slide-visible swiper-slide-prev" data-swiper-slide-index="5" role="group" aria-label="6 / 6" style="width: 295.385px; margin-right: 20px;">
+                        <!-- <img src="./img/icon/icon_sponsor01.svg" alt="고객사 로고"/> -->
+                        <p class="example_company_name">P사</p>
+                        <p class="title">자기이해 프로그램</p>
+                        <p>양방향 소통을 통해 더욱 적극적으로 교육에 참여할수 있도록 유도해주셔서 좋았습니다. 무엇보다 시각적인 자료를 통해 자신에 대한 이해와 더불어 타인에 대해서 알아갈 수 있는 계기를 마련해 주어서 좋았습니다!</p>
+                        <!-- <p class="manager_t">인사담당 매니저</p> -->
+                    </a>
+                        <a href="javascript:;" class="swiper-slide swiper-slide-visible swiper-slide-active" data-swiper-slide-index="0" role="group" aria-label="1 / 6" style="width: 295.385px; margin-right: 20px;">
+                            <!-- <img src="./img/icon/icon_sponsor01.svg" alt="고객사 로고"/> -->
+                            <p class="example_company_name">A사</p>
+                            <p class="title">버크만 진단은 스스로에 대한 이해를 통해 지금하는 일을 더욱 잘 할 수 있게 만들어 줍니다. 또한 적절한 커리어 플랜을 세울 수 있게 돕습니다.</p>
+                            <p>자신에 대한 풍부한 이해를 바탕으로 타인을 이해하는 틀을 학습할 수 있고, 사회적 관계에 윤활유 역할을 해줍니다.</p>
+                            <p class="manager_t">조직문화개발팀 담당자</p>
+                        </a>
+                        <a href="javascript:;" class="swiper-slide swiper-slide-visible swiper-slide-next" data-swiper-slide-index="1" role="group" aria-label="2 / 6" style="width: 295.385px; margin-right: 20px;">
+                            <!-- <img src="./img/icon/icon_sponsor01.svg" alt="고객사 로고"/> -->
+                            <p class="example_company_name">S사</p>
+                            <p class="title">HR 인재 관리 및 제도를 운영하며 수많은 분석 툴을 접해 보았지만, 개인에 대한 분석과 그룹 구성원 간 관계를 함께 분석하며 이렇게 깊이 있는 툴은 버크만이 독보적이라고 생각합니다!</p>
+                            <p>조직 개발에 활용할 수 있는 툴로 추천합니다.</p>
+                            <p class="manager_t">Tech HR TL</p>
+                        </a>
+                        <a href="javascript:;" class="swiper-slide" data-swiper-slide-index="2" role="group" aria-label="3 / 6" style="width: 295.385px; margin-right: 20px;">
+                            <!-- <img src="./img/icon/icon_sponsor01.svg" alt="고객사 로고"/> -->
+                            <p class="example_company_name">C재단</p>
+                            <p class="title">사람의 성격유형을 몇 가지 범주로 나누는 것이 얼마나 위험한 일인지 알게 되었습니다.</p>
+                            <p>고객 자신이 얼마나 고유한 존재인지 발견할 수 있도록 돕고, 조직내 구성원간의 역동을 이해할 수 있도록 돕는 최고의 도구입니다.</p>
+                            <p class="manager_t">센터 기관장</p>
+                        </a>
+                        <a href="javascript:;" class="swiper-slide" data-swiper-slide-index="3" role="group" aria-label="4 / 6" style="width: 295.385px; margin-right: 20px;">
+                            <p class="example_company_name">K사</p>
+                            <!-- <img src="./img/icon/icon_sponsor01.svg" alt="고객사 로고"/> -->
+                            <p class="title">팀빌딩 프로그램</p>
+                            <p>근무시간 중에는 알기 어려웠던 팀원들의 성향에 대해 이해하는 시간이 의미있었고, 업무처리 시 팀원들의 성향에 대해 다시 한번 생각하고 임하게 되는 점이 당장 눈에 띄는 효과는 보지 못하더라도 시간이 지나고 조직문화에 스며들면서 조직 전체적으로는 시너지가 있을 것으로 생각합니다.</p>
+                            <!-- <p class="manager_t">인사담당 매니저</p> -->
+                        </a>
+                        <a href="javascript:;" class="swiper-slide" data-swiper-slide-index="4" role="group" aria-label="5 / 6" style="width: 295.385px; margin-right: 20px;">
+                            <!-- <img src="./img/icon/icon_sponsor01.svg" alt="고객사 로고"/> -->
+                            <p class="example_company_name">Y대학교</p>
+                            <p class="title">자기이해 및 커리어 프로그램</p>
+                            <p>자신의 흥미분야와 평소행동 특징을 수치, 지표로 알 수 있어서 나에 대한 이해를 높일 수 있는 프로그램이었으며,
+                                스스로에 대해서만이 아닌 다른 이에게 어떤 식으로 상호작용할 수 있는지 배울 수 있어서 좋았습니다.</p>
+                            <!-- <p class="manager_t">인사담당 매니저</p> -->
+                        </a>
+                        <a href="javascript:;" class="swiper-slide swiper-slide-duplicate-prev" data-swiper-slide-index="5" role="group" aria-label="6 / 6" style="width: 295.385px; margin-right: 20px;">
+                            <!-- <img src="./img/icon/icon_sponsor01.svg" alt="고객사 로고"/> -->
+                            <p class="example_company_name">P사</p>
+                            <p class="title">자기이해 프로그램</p>
+                            <p>양방향 소통을 통해 더욱 적극적으로 교육에 참여할수 있도록 유도해주셔서 좋았습니다. 무엇보다 시각적인 자료를 통해 자신에 대한 이해와 더불어 타인에 대해서 알아갈 수 있는 계기를 마련해 주어서 좋았습니다!</p>
+                            <!-- <p class="manager_t">인사담당 매니저</p> -->
+                        </a>
+                        <a href="javascript:;" class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" role="group" aria-label="1 / 6" style="width: 295.385px; margin-right: 20px;">
+                            <!-- <img src="./img/icon/icon_sponsor01.svg" alt="고객사 로고"/> -->
+                            <p class="example_company_name">A사</p>
+                            <p class="title">버크만 진단은 스스로에 대한 이해를 통해 지금하는 일을 더욱 잘 할 수 있게 만들어 줍니다. 또한 적절한 커리어 플랜을 세울 수 있게 돕습니다.</p>
+                            <p>자신에 대한 풍부한 이해를 바탕으로 타인을 이해하는 틀을 학습할 수 있고, 사회적 관계에 윤활유 역할을 해줍니다.</p>
+                            <p class="manager_t">조직문화개발팀 담당자</p>
+                        </a><a href="javascript:;" class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="1" role="group" aria-label="2 / 6" style="width: 295.385px; margin-right: 20px;">
+                            <!-- <img src="./img/icon/icon_sponsor01.svg" alt="고객사 로고"/> -->
+                            <p class="example_company_name">S사</p>
+                            <p class="title">HR 인재 관리 및 제도를 운영하며 수많은 분석 툴을 접해 보았지만, 개인에 대한 분석과 그룹 구성원 간 관계를 함께 분석하며 이렇게 깊이 있는 툴은 버크만이 독보적이라고 생각합니다!</p>
+                            <p>조직 개발에 활용할 수 있는 툴로 추천합니다.</p>
+                            <p class="manager_t">Tech HR TL</p>
+                        </a></div>
+                    <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-12de60110c10a10b582"><img src="/birkman/img/icon/icon_left_arrow.svg" alt=""></div>
+                    <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-12de60110c10a10b582"><img src="/birkman/img/icon/icon_left_arrow.svg" alt=""></div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+            </div>
+            <div class="sponsor_list">
+                <div class="swiper swiper-initialized swiper-horizontal swiper-autoheight swiper-ios">
+                    <ul class="swiper-wrapper" id="swiper-wrapper-7462110aaabc9e6af" aria-live="polite" style="height: 90px; transform: translate3d(0px, 0px, 0px);">
+                        <li class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 12">
+                            <img src="/birkman/img/icon/icon_sponsor01.svg" alt="">
+                        </li>
+                        <li class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 12">
+                            <img src="/birkman/img/icon/icon_sponsor01.svg" alt="">
+                        </li>
+                        <li class="swiper-slide" role="group" aria-label="3 / 12">
+                            <img src="/birkman/img/icon/icon_sponsor01.svg" alt="">
+                        </li>
+                        <li class="swiper-slide" role="group" aria-label="4 / 12">
+                            <img src="/birkman/img/icon/icon_sponsor01.svg" alt="">
+                        </li>
+                        <li class="swiper-slide" role="group" aria-label="5 / 12">
+                            <img src="/birkman/img/icon/icon_sponsor01.svg" alt="">
+                        </li>
+                        <li class="swiper-slide" role="group" aria-label="6 / 12">
+                            <img src="/birkman/img/icon/icon_sponsor01.svg" alt="">
+                        </li>
+                        <li class="swiper-slide" role="group" aria-label="7 / 12">
+                            <img src="/birkman/img/icon/icon_sponsor01.svg" alt="">
+                        </li>
+                        <li class="swiper-slide" role="group" aria-label="8 / 12">
+                            <img src="/birkman/img/icon/icon_sponsor01.svg" alt="">
+                        </li>
+                        <li class="swiper-slide" role="group" aria-label="9 / 12">
+                            <img src="/birkman/img/icon/icon_sponsor01.svg" alt="">
+                        </li>
+                        <li class="swiper-slide" role="group" aria-label="10 / 12">
+                            <img src="/birkman/img/icon/icon_sponsor01.svg" alt="">
+                        </li>
+                        <li class="swiper-slide" role="group" aria-label="11 / 12">
+                            <img src="/birkman/img/icon/icon_sponsor01.svg" alt="">
+                        </li>
+                        <li class="swiper-slide" role="group" aria-label="12 / 12">
+                            <img src="/birkman/img/icon/icon_sponsor01.svg" alt="">
+                        </li>
+                    </ul>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="fixed_menu pc_only">
+    <ul>
+        <li><a href="./mypage.php"><img src="/birkman/img/icon/icon_fixed_mypage.svg" alt="">마이페이지</a></li>
+        <li><a href="./diagnosis.php"><img src="/birkman/img/icon/icon_fixed_diagnosis.svg" alt="">진단구매</a></li>
+        <li><a href="./education_list.php"><img src="/birkman/img/icon/icon_fixed_education.svg" alt="">교육일정</a></li>
+        <li><a href="./comm_faq.php"><img src="/birkman/img/icon/icon_fixed_faq.svg" alt="">FAQ</a></li>
+    </ul>
+</div>
+
+<div class="fixed_btns pc_flex">
+    <div>
+        기본교육<a href="javascript:;">바로가기</a>
+    </div>
+    <a href="#footer" class="page_up_btn"></a>
+</div>
+
+<!--- 메인 팝업 -->
+<div class="pop_wrap main_pop">
+    <div class="pop_dim"></div>
+    <div class="pop_cont">
+        <!--
+        <div class="pop_title">알림
+            <button type="button" class="pop_close"></button>
+        </div> -->
+        <div class="pop_inner center_t">
+            <a href="javascript:;">
+                <img src="./img/img_mb_work1.svg" alt="">
+            </a>
+        </div>
+        <div class="btn_wrap justify_center type2">
+            <input type="checkbox" id="hide_pop" class="checkbox">
+            <label for="hide_pop">오늘 하루 보지 않기</label>
+            <button type="button" class="pop_close">닫기</button>
+        </div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <div class="inner">
+        <div>
+            <div class="top">
+                <ul class="ft_gnb_list">
+                    <li>
+                        <p>버크만 솔루션</p>
+                        <ul class="ft_gnb">
+                            <li><a href="./education_intro.php">자격교육 과정 소개</a></li>
+                            <li><a href="./education_company.php">기업 솔루션 소개</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>진단 구매</p>
+                        <ul class="ft_gnb">
+                            <li><a href="./diagnosis_intro.php">버크만 진단 구매</a></li>
+                            <li><a href="./diagnosis_book.php">교구 구매</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>커뮤니케이션</p>
+                        <ul class="ft_gnb">
+                            <li><a href="./comm_notice.php">공지사항</a></li>
+                            <li><a href="./comm_event.php">이벤트</a></li>
+                            <li><a href="./comm_blog.php">BLOG</a></li>
+                            <li><a href="./comm_faq.php">자주하는 질문</a></li>
+                            <li><a href="./service_use_info.php">맞춤 교육 문의</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>연구실</p>
+                        <ul class="ft_gnb">
+                            <li><a href="./data_research.php">연구</a></li>
+                            <li><a href="./data_material.php">자료</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>회사소개</p>
+                        <ul class="ft_gnb">
+                            <li><a href="./introduction.php">버크만코리아 소개</a></li>
+                            <li><a href="./introduct_history.php">주요 연혁</a></li>
+                            <li><a href="./introduct_method.php">Birkman Method</a></li>
+                            <li><a href="./introduct_work.php">Birkman at Work</a></li>
+                            <li><a href="./education_teacher.php">강사 소개</a></li>
+                            <li><a href="./introduct_map.php">찾아오시는 길</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom">
+                <h1><img src="/birkman/img/logo_w.svg" alt="BIRKMAN"></h1>
+                <div class="pc_only">
+                    <ul class="array_ul">
+                        <li>
+                            <ul class="devide_ul">
+                                <li><span>대표</span>윤종만</li>
+                                <li><span>사업자등록번호</span>169-87-00222</li>
+                                <li><span>통신판매업신고번호</span>제2009-서울영등포-1173호</li>
+                                <li><span>대표전화</span>02-2676-0400</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="devide_ul">
+                                <li><span>FAX</span>02-703-9182</li>
+                                <li><span>E-mail</span>admin@birkmankorea.co.kr</li>
+                                <li><span>주소</span>서울시 영등포구 경인로 775 (에이스하이테크시티 1동 908호)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mb_only">
+                    <ul class="array_ul">
+                        <li><span>대표</span>윤종만</li>
+                        <li><span>사업자등록번호</span>169-87-00222</li>
+                        <li><span>통신판매업신고번호</span>제2009-서울영등포-1173호</li>
+                        <li><span>주소</span>서울시 영등포구 경인로 775 (에이스하이테크시티 1동 908호)</li>
+                        <li><span>대표전화</span>02-2676-0400</li>
+                        <li><span>FAX</span>02-703-9182</li>
+                        <li><span>E-mail</span>admin@birkmankorea.co.kr</li>
+                    </ul>
+                </div>
+                <ul class="devide_ul">
+                    <li><a href="./policy_service.php">이용약관</a></li>
+                    <li><a href="./policy_privacy.php">개인정보처리방침</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex justify_between items_center">
+            <div class="left gray_t5 copy">
+                Copyright 버크만코리아 All Rights Reserved
+            </div>
+            <ul class="sns_area right">
+                <li><a href="https://blog.naver.com/birkman_kr"><img src="/birkman/img/icon/icon_blog.svg" alt=""></a>
+                    <a href="javascript:;"><img src="/birkman/img/icon/icon_insta.svg" alt=""></a></li>
+                <li>
+                    <select name="" id="">
+                        <option value="">Family Site</option>
+                        <option value="">Family Site</option>
+                        <option value="">Family Site</option>
+                        <option value="">Family Site</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>	<!-- <div class="pop_wrap test_pop"> -->
+<!-- 	<div class="pop_dim"></div> -->
+<!-- 	<div class="pop_cont"> -->
+<!-- 		<p>테스트 팝업 입니다!</p> -->
+<!-- 	</div> -->
+<!-- </div> -->

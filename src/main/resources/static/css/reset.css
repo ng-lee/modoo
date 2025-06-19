@@ -1,0 +1,53 @@
+/*===========================================================================
+	RESET
+============================================================================*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var,
+u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+/*table,*/ caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, button, input, br {margin:0;padding:0;border:0;box-sizing:border-box;line-height:1.4;/*letter-spacing:-0.36px;*/font-size:14px;font-weight:400;font-family: 'Pretendard', sans-serif;color:#4D525C;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display:block}
+a {display: inline-block;text-decoration:none;color:inherit;}
+a:link, a:visited {text-decoration:none;}
+a:hover, a:active {text-decoration:none;}
+img {border:none;vertical-align:middle;}
+ol, ul, li {list-style:none;}
+i, em {font-style: normal;}
+table {border-collapse: collapse;border-spacing: 0;}
+fieldset {border:none;}
+legend{width:1px;height:1px;overflow:hidden;visibility:hidden;line-height:0;font-size:0;position:absolute; left:-999px;}
+button, input[type="button"] {padding:0;margin:0;border:none;vertical-align:middle;cursor:pointer;background:transparent;}
+input{margin:0;padding:0;border:0;}
+input[type=text]::-ms-clear {display:none;}
+input[type=password]::-ms-clear {display:none;}
+input, select, button, textarea{outline: none; -moz-appearance: none; -webkit-appearance: none;}
+button:focus{outline:0;}
+input[type="text"], input[type="password"], input[type="number"], textarea, select {width:100%;height:48px;padding:16px;border:1px solid #E7E9EC;border-radius:6px;background-color:#FFFFFF;font-size:14px;color:#373B42; transition: all 0.3s;}
+input[type="password"] {height:56px;}
+textarea {height: auto; resize:none;font-family: 'Pretendard', sans-serif; box-sizing: border-box;}
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {border-color: #005E7A;}
+input[type="text"]:read-only, input[type="password"]:read-only, textarea:read-only {background-color:#F5F6F7;}
+input[type="text"]:read-only:focus, textarea:read-only:focus {border-color: #C1C1C1;} /*수정필요*/
+input::placeholder, textarea::placeholder {color:#B5BAC4;}
+input[type="checkbox"], input[type="radio"], input[type="file"] {display:none;}
+select{background:right 12px center/auto no-repeat url('/birkman/img/icon/icon_select_arrow.svg');padding-right:34px;font-family: 'Pretendard', sans-serif; color:#B5BAC4;}
+/*select.selecred_text {color:}*/
+/*reset end*/
+
+/*===========================================================================
+	Scrollbar
+============================================================================*/
+*::-webkit-scrollbar {width:4px;height:7px;margin-right:-10px;} 
+*::-webkit-scrollbar-track { background-color:transparent; } 
+*::-webkit-scrollbar-thumb { background: #808080; border-radius: 2px;cursor:pointer; } 
+*::-webkit-scrollbar-button { display: none; }
+
