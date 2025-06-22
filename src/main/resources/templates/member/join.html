@@ -1,74 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>회원가입</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <title>회원가입</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <style>
-        .category-icon {
-            border: 2px solid transparent;
-            border-radius: 5px;
-            margin-right: 10px;
-            transition: border-color 0.3s;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <h1 class="login-title">modoo</h1>
+        <style>
+            .category-icon {
+                border: 2px solid transparent;
+                border-radius: 5px;
+                margin-right: 10px;
+                transition: border-color 0.3s;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="login-container">
+            <h1 class="login-title">modoo</h1>
 
-        <form th:action="@{/join}" th:method="post">
-            <div class="form-group">
-                <label for="memberId">아이디</label>
-                <input type="text" id="memberId" name="memberId" placeholder="ID">
-            </div>
-
-            <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" placeholder="PASSWORD">
-            </div>
-
-            <div class="form-group">
-                <label for="name">이름</label>
-                <input type="text" id="name" name="name" placeholder="이름">
-            </div>
-
-            <div class="form-group">
-                <label for="phone">휴대폰 번호</label>
-                <input type="tel" id="phone" name="phone" placeholder="010-1234-5678">
-            </div>
-
-            <div class="form-group">
-                <p>관심 카테고리</p>
-                <input type="hidden" name="category" id="categoryInput">
-
-                <div class="category-icons">
-                    <img src="/images/exercise.png" alt="운동" data-value="운동" class="category-icon"
-                         style="width:50px; cursor:pointer;">
-                    <img src="/images/cooking.png" alt="요리" data-value="요리" class="category-icon"
-                         style="width:50px; cursor:pointer;">
-                    <img src="/images/reading.png" alt="독서" data-value="독서" class="category-icon"
-                         style="width:50px; cursor:pointer;">
+            <form th:action="@{/join}" th:method="post">
+                <div class="form-group">
+                    <label for="memberId">아이디</label>
+                    <input type="text" id="memberId" name="memberId" placeholder="ID">
                 </div>
-            </div>
 
-            <div class="form-group">
-                <select id="city" name="city">
-                    <option value="">-- 시 선택 --</option>
-                    <option value="인천">인천</option>
-                    <option value="서울">서울</option>
-                </select>
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" name="password" placeholder="PASSWORD">
+                </div>
 
-                <select id="district" name="district">
-                    <option value="">-- 구 선택 --</option>
-                    <option value="미추홀구">미추홀구</option>
-                    <option value="부평구">부평구</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" name="name" placeholder="이름">
+                </div>
 
-            <button type="submit" class="btn-join">회원가입</button>
-        </form>
-    </div>
-</body>
+                <div class="form-group">
+                    <label for="phone">휴대폰 번호</label>
+                    <input type="tel" id="phone" name="phone" placeholder="010-1234-5678">
+                </div>
+
+                <div class="form-group">
+                    <p>관심 카테고리</p>
+                    <input type="hidden" name="category" id="categoryInput">
+
+                    <div class="category-icons">
+                        <img src="/images/exercise.png" alt="운동" data-value="운동" class="category-icon"
+                             style="width:50px; cursor:pointer;">
+                        <img src="/images/cooking.png" alt="요리" data-value="요리" class="category-icon"
+                             style="width:50px; cursor:pointer;">
+                        <img src="/images/reading.png" alt="독서" data-value="독서" class="category-icon"
+                             style="width:50px; cursor:pointer;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <select id="city" name="city">
+                        <option value="">-- 시 선택 --</option>
+                        <option value="인천">인천</option>
+                        <option value="서울">서울</option>
+                    </select>
+
+                    <select id="district" name="district">
+                        <option value="">-- 구 선택 --</option>
+                        <option value="미추홀구">미추홀구</option>
+                        <option value="부평구">부평구</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-join">회원가입</button>
+            </form>
+        </div>
+    </body>
 </html>
