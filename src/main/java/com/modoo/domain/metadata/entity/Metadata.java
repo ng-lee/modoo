@@ -1,5 +1,6 @@
 package com.modoo.domain.metadata.entity;
 
+import com.modoo.domain.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;

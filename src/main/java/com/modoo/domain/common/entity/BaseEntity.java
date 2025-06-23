@@ -1,4 +1,4 @@
-package com.modoo.domain.member.entity;
+package com.modoo.domain.common.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
