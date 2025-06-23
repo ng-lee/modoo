@@ -50,4 +50,10 @@ h2 { font-size: 20px; margin-bottom: 10px; }
 
 /* 반응형 - 태블릿 이하 (2개씩) */
 @media (max-width: 900px) {
-  .group { width: c
+  .group { width: calc(50% - 20px); }
+}
+
+/* 반응형 - 모바일 (1개씩) */
+@media (max-width: 600px) {
+  .group { width: 100%; }
+}
