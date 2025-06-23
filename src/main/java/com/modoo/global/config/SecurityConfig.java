@@ -30,7 +30,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request ->
                         request.requestMatchers("/login", "/", "/join").permitAll()
                                 .anyRequest().authenticated())
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exception ->
+                        exception.authenticationEntryPoint((request, response, authException) ->
+                                response.sendRedirect("/login"))
+                );
 
         return http.build();
     }
