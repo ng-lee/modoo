@@ -39,7 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         AntPathMatcher antPathMatcher = new AntPathMatcher();
 
-        String[] patterns = {"/login", "/join"};
+        String[] patterns = {"/css/**", "/assets/**", "/favicon.ico", "/login", "/join"};
         String path = request.getRequestURI();
         String method = request.getMethod();
         boolean isPatternMatched = Arrays.stream(patterns)
@@ -60,7 +60,7 @@ public class JwtFilter extends OncePerRequestFilter {
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        log.info("/// JwtFilter ///");
+//        log.info("/// {} - JwtFilter ///", request.getRequestURI());
 
         Cookie[] cookies = request.getCookies();
 
