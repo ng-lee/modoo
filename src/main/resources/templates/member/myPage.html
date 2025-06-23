@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <th:block th:replace="~{/layout :: setContent(~{this::content})}">
+
+        <th:block th:fragment="content">
+            <main class="main-content">
+                <section>
+                    <h1>My Page</h1>
+
+                    <div class="profile-section">
+                        <h2>Profile</h2>
+                        이름 : <span sec:authentication="principal.name"></span>
+                    </div>
+                </section>
+            </main>
+        </th:block>
+    </th:block>
+</html>
