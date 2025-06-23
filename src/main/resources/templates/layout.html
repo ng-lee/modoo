@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:fragment="setContent(content)">
     <head>
@@ -25,7 +26,8 @@
             <input type="text" placeholder="검색어를 입력하세요"/>
         </div>
         <div class="profile">
-            <a th:href="@{/login}">👤</a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/myPage}">My page</a>
+            <a sec:authorize="isAnonymous()" th:href="@{/login}">👤</a>
         </div>
     </header>
 

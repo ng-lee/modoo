@@ -1,5 +1,6 @@
 package com.modoo.domain.member.entity;
 
+import com.modoo.domain.common.entity.BaseEntity;
 import com.modoo.domain.member.dto.request.MemberRequest;
 import jakarta.persistence.*;
 import lombok.*;
