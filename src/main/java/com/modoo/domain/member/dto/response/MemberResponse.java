@@ -12,19 +12,21 @@ import java.time.LocalDateTime;
 @ToString
 public class MemberResponse {
 
-    private Long cd;
-    private String id;
+    private Long memberCd;
+    private String memberId;
     private String password;
     private String name;
     private String phone;
     private Integer categoryCd;
     private Integer regionCd;
+    private String profile;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
     public static MemberResponse fromEntity(Member member) {
         return MemberResponse.builder()
-                .id(member.getId())
+                .memberCd(member.getMemberCd())
+                .memberId(member.getMemberId())
                 .name(member.getName())
                 .build();
     }
