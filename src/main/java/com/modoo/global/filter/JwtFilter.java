@@ -51,7 +51,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
     /**
      * jwt 인증 필터
-     *
+     * access token 만료 시
+     *  ㄴ refresh token 유효 시 access token 재발급
+     *  ㄴ refresh token 만료 시 로그인 페이지
      * @param request
      * @param response
      * @param filterChain
@@ -81,15 +83,18 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         try {
+            // access token 유효성 검증 및 인증 세팅
             jwtUtil.validateToken(accessToken);
             Claims claims = jwtUtil.getClaims(accessToken);
             String memberCd = String.valueOf(claims.get("memberCd"));
 
             setAuthentication(memberCd);
-        } catch (ExpiredJwtException accessTokenExpiredException) {
-            // access token 만료 시 refresh token 유효성 체크
-            log.error("access token is expired", accessTokenExpiredException);
+        } catch (ExpiredJwtException accessExpiredException) {
+            // access token 만료된 경우
+            log.error("Access token error", accessExpiredException);
+
             try {
+                // refresh token 유효할 경우 access token 재발급
                 jwtUtil.validateToken(refreshToken);
                 Claims claims = jwtUtil.getClaims(refreshToken);
                 String memberCd = String.valueOf(claims.get("memberCd"));
@@ -107,13 +112,13 @@ public class JwtFilter extends OncePerRequestFilter {
                     accessTokenCookie.setHttpOnly(true);
                     response.addCookie(accessTokenCookie);
                 }
-            } catch (ExpiredJwtException refreshTokenExpiredException) {
-                log.error("refresh token is expired", refreshTokenExpiredException);
+            } catch (ExpiredJwtException refreshExpiredException) {
+                log.error("Refresh token error", refreshExpiredException);
             } catch (Exception e) {
-                log.error("refresh token validation error", e);
+                log.error("Refresh token validation error", e);
             }
         } catch (Exception e) {
-            log.error("access token validation error", e);
+            log.error("Access token validation error", e);
         }
 
         filterChain.doFilter(request, response);
