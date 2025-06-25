@@ -1,7 +1,9 @@
 package com.modoo.domain.clubs.entity;
 
+import com.modoo.domain.clubs.dto.request.ClubsRequest;
 import com.modoo.domain.common.entity.BaseEntity;
 import com.modoo.domain.member.dto.request.MemberRequest;
+import com.modoo.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
@@ -39,4 +41,17 @@ public class Clubs extends BaseEntity {
     @Comment(value = "지역 코드")
     private Integer regionCd;
 
+    @Column(length = 10, nullable = false)
+    @Comment(value = "정원")
+    private Integer capacity;
+
+    public static Clubs of(ClubsRequest request) {
+        return Clubs.builder()
+                .name(request.getName())
+                .contents(request.getContents())
+                .categoryCd(request.getCategoryCd())
+                .capacity(request.getCapacity())
+                .regionCd(request.getRegionCd())
+                .build();
+    }
 }

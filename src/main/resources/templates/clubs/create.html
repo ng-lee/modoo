@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="UTF-8">
         <title>모임 생성</title>
@@ -9,24 +9,22 @@
         <!-- Header -->
         <div class="header">
             <div class="logo">modoo</div>
-            <div class="region"><button>▽ 부평구</button></div>
-            <div class="search"><input type="text" placeholder="검색" /></div>
+            <div class="region">
+                <button>▽ 부평구</button>
+            </div>
+            <div class="search"><input type="text" placeholder="검색"/></div>
             <div class="profile">👤</div>
         </div>
 
         <!-- Sidebar -->
         <div class="sidebar">
             <h3>category</h3>
-            <select>
-                <option></option>
-                <option></option>
+            <select name="category" id="category">
+                <option value="">-- 카테고리 선택 --</option>
+                <th:block th:each="category : ${categoryList}">
+                    <option th:value="${category.metadataCd}" th:text="${category.contents}"></option>
+                </th:block>
             </select>
-            <ul>
-                <li><a href="#">전체</a></li>
-                <li><a href="#">카테고리 1</a></li>
-                <li><a href="#">카테고리 2</a></li>
-                <li><a href="#">카테고리 3</a></li>
-            </ul>
         </div>
 
         <!-- Main Content -->
@@ -35,8 +33,8 @@
                 <h2>모임 생성</h2>
 
                 <div class="form-group">
-                    <label>모임명</label>
-                    <input type="text" />
+                    <label for="clubs_name">모임명</label>
+                    <input type="text" id="clubs_name"/>
                 </div>
 
                 <div class="form-group">
@@ -53,20 +51,77 @@
                 </div>
 
                 <div class="form-group">
-                    <label>정원</label>
-                    <input type="range" min="0" max="100" />
+                    <label for="clubs_capacity">정원</label>
+                    <input type="text" min="0" max="100" id="clubs_capacity"/>
                 </div>
 
                 <div class="form-group">
-                    <label>모임 상세 내용</label>
-                    <textarea class="detail-textarea" rows="5"></textarea>
+                    <label for="clubs_contents">모임 상세 내용</label>
+                    <textarea class="detail-textarea" rows="5" id="clubs_contents"></textarea>
                 </div>
 
                 <div class="form-buttons">
                     <button class="btn cancel">취소</button>
-                    <button class="btn submit">작성 완료</button>
+                    <button class="btn submit" onclick="createClubs();">작성 완료</button>
                 </div>
             </section>
         </div>
+        <script th:inline="javascript">
+            $(document).ready(function () {
+            });
+
+            /*빈 값 확인*/
+            function isEmpty(str) {
+                if (typeof str == "undefined" || str === "undefined" || str == null || $.trim(str).length < 1) return true;
+                else return false ;
+            }
+
+            /*모임 저장*/
+            function createClubs() {
+                let param = {};
+                if (isEmpty($('#clubs_name').val())) {
+                    console.log($('#clubs_name').val());
+                    alert('모임명을 입력해주세요.');
+                    $('#clubs_name').focus();
+                    return false;
+                }
+                if (isEmpty($('#clubs_contents').val())) {
+                    alert('모임 상세 내용을 입력해주세요.');
+                    $('#clubs_contents').focus();
+                    return false;
+                }
+                if (isEmpty($('#clubs_capacity').val())) {
+                    alert('모임 정원을 입력해주세요.');
+                    $('#clubs_capacity').focus();
+                    return false;
+                }
+                if (isEmpty($('select[name="category"]').val())) {
+                    alert('카테고리를 선택해주세요.');
+                    $('select[name="category"]').focus();
+                    return false;
+                }
+                param.name = $('#clubs_name').val();
+                param.contents = $('#clubs_contents').val();
+                param.capacity = $('#clubs_capacity').val();
+                param.categoryCd = $('select[name="category"]').val();
+                param.regionCd = 1;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/clubs/create",
+                    contentType: 'application/json',
+                    data: JSON.stringify(param),
+                    success: function(response) {
+                        console.log(response);
+                        alert("글이 성공적으로 저장되었습니다.");
+                    },
+                    error: function(xhr, status, error) {
+                        alert("오류 발생");
+                        console.error("상태 코드:", status);
+                        console.error("응답:", xhr.responseText);
+                    }
+                });
+            }
+        </script>
     </body>
 </html>
