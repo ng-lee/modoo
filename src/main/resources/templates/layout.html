@@ -50,13 +50,11 @@
                     url: '/api/category',
                     type: 'GET',
                     success: function success(data) {
-                        debugger
-                        console.log(data)
                         let dataSize = data.length;
                         let sidebar = $('.sidebar ul');
-                        let categoryList = `<li><a href="#">전체</a></li>`;
+                        let categoryList = `<li><a href="/clubs">전체</a></li>`;
                         for(let i = 0; i < dataSize; i++) {
-                            categoryList += `<li><a href="#">${data[i].contents}</a></li>`
+                            categoryList += `<li><a href="/clubs?metadataCd=${data[i].metadataCd}">${data[i].contents}</a></li>`
                         }
                         sidebar.append(categoryList);
                     },
