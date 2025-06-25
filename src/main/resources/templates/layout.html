@@ -2,54 +2,70 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<th:block th:fragment="setContent(content)">
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        <meta name="description" content=""/>
-        <meta name="author" content=""/>
-        <title>Simple Sidebar - Start Bootstrap Template</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}"/>
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link th:href="@{/css/style.css}" rel="stylesheet"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    </head>
-    <body>
-    <!-- 헤더 -->
-    <header class="header">
-        <div class="logo">
-            <a th:href="@{/}">modoo</a>
-        </div>
-        <div class="region">
-            <button>부평구 ▼</button>
-        </div>
-        <div class="search">
-            <input type="text" placeholder="검색어를 입력하세요"/>
-        </div>
-        <div class="profile">
-            <a sec:authorize="isAuthenticated()" th:href="@{/myPage}">My page</a>
-            <a sec:authorize="isAnonymous()" th:href="@{/login}">👤</a>
-        </div>
-    </header>
+    <th:block th:fragment="setContent(content)">
+        <head>
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+            <meta name="description" content=""/>
+            <meta name="author" content=""/>
+            <title>Simple Sidebar - Start Bootstrap Template</title>
+            <!-- Favicon-->
+            <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}"/>
+            <!-- Core theme CSS (includes Bootstrap)-->
+            <link th:href="@{/css/style.css}" rel="stylesheet"/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        </head>
+        <body>
+        <!-- 헤더 -->
+        <header class="header">
+            <div class="logo">
+                <a th:href="@{/}">modoo</a>
+            </div>
+            <div class="region">
+                <button>부평구 ▼</button>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="검색어를 입력하세요"/>
+            </div>
+            <div class="profile">
+                <a sec:authorize="isAuthenticated()" th:href="@{/myPage}">My page</a>
+                <a sec:authorize="isAnonymous()" th:href="@{/login}">👤</a>
+            </div>
+        </header>
 
-    <!-- 사이드바 -->
-    <nav class="sidebar">
-        <h3>category</h3>
-        <ul>
-            <li><a href="#">전체</a></li>
-            <li><a href="#">카테고리 1</a></li>
-            <li><a href="#">카테고리 2</a></li>
-            <li><a href="#">카테고리 3</a></li>
-            <li>·</li>
-            <li>·</li>
-        </ul>
-    </nav>
+        <!-- 사이드바 -->
+        <nav class="sidebar">
+            <h3>category</h3>
+            <ul></ul>
+        </nav>
 
-    <!-- Page content-->
-    <div class="container-fluid">
-        <th:block th:replace="${content}"></th:block>
-    </div>
-    </body>
-</th:block>
+        <!-- Page content-->
+        <div class="container-fluid">
+            <th:block th:replace="${content}"></th:block>
+        </div>
+
+        <script th:inline="javascript">
+            $(document).ready(function() {
+                $.ajax({
+                    url: '/api/category',
+                    type: 'GET',
+                    success: function success(data) {
+                        debugger
+                        console.log(data)
+                        let dataSize = data.length;
+                        let sidebar = $('.sidebar ul');
+                        let categoryList = `<li><a href="#">전체</a></li>`;
+                        for(let i = 0; i < dataSize; i++) {
+                            categoryList += `<li><a href="#">${data[i].contents}</a></li>`
+                        }
+                        sidebar.append(categoryList);
+                    },
+                    error: function error(error) {
+                        console.log(error)
+                    }
+                })
+            });
+        </script>
+        </body>
+    </th:block>
 </html>
