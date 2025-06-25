@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>모임 생성</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">modoo</div>
+            <div class="region"><button>▽ 부평구</button></div>
+            <div class="search"><input type="text" placeholder="검색" /></div>
+            <div class="profile">👤</div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>category</h3>
+            <select>
+                <option></option>
+                <option></option>
+            </select>
+            <ul>
+                <li><a href="#">전체</a></li>
+                <li><a href="#">카테고리 1</a></li>
+                <li><a href="#">카테고리 2</a></li>
+                <li><a href="#">카테고리 3</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <section>
+                <h2>모임 생성</h2>
+
+                <div class="form-group">
+                    <label>모임명</label>
+                    <input type="text" />
+                </div>
+
+                <div class="form-group">
+                    <label>대표 이미지</label>
+                    <div class="image-box"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>첨부 이미지 (선택)</label>
+                    <div class="image-upload-row">
+                        <div class="image-box small"></div>
+                        <div class="image-box small"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>정원</label>
+                    <input type="range" min="0" max="100" />
+                </div>
+
+                <div class="form-group">
+                    <label>모임 상세 내용</label>
+                    <textarea class="detail-textarea" rows="5"></textarea>
+                </div>
+
+                <div class="form-buttons">
+                    <button class="btn cancel">취소</button>
+                    <button class="btn submit">작성 완료</button>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>
