@@ -19,7 +19,7 @@ public class MemberResponse {
     private String phone;
     private Integer categoryCd;
     private Integer regionCd;
-    private String profile;
+    private Integer profile;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 

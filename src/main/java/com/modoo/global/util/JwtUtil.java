@@ -108,12 +108,16 @@ public class JwtUtil {
      */
     public void validateToken(String token) {
         try {
+            if (token == null) {
+                throw new ExpiredJwtException(null, null, "token is null");
+            }
+
             Jwts.parser()
                 .setSigningKey(createSigningKey())
                 .parseClaimsJws(token);
         } catch (ExpiredJwtException e) {
             log.error("token is expired", e);
-            throw new RuntimeException("token is expired");
+            throw e;
         } catch (Exception e) {
             log.error("token is invalid", e);
             throw new RuntimeException("token is invalid");
