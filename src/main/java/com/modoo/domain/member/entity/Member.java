@@ -44,7 +44,7 @@ public class Member extends BaseEntity {
     private Integer regionCd;
 
     @Comment(value = "프로필 사진")
-    private String profile;
+    private Integer profile;
 
     @Comment(value = "refresh token")
     private String refreshToken;
