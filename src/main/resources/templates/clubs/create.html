@@ -4,16 +4,24 @@
         <meta charset="UTF-8">
         <title>모임 생성</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script th:src="@{/js/common.js}"></script>
     </head>
     <body>
         <!-- Header -->
         <div class="header">
             <div class="logo">modoo</div>
-            <div class="region">
-                <button>▽ 부평구</button>
-            </div>
-            <div class="search"><input type="text" placeholder="검색"/></div>
-            <div class="profile">👤</div>
+            <h3>지역</h3>
+            <select name="region_sido" id="region_sido" onchange="getSigunguList(this);">
+                <option value="">-- 시도 선택 --</option>
+                <th:block th:each="sido : ${sidoList}">
+                    <option th:value="${sido.sidoCd}" th:text="${sido.sidoName}"></option>
+                </th:block>
+            </select>
+            <select name="region_sigungu" id="region_sigungu" onchange="getDongList(this);" style="display: none;">
+            </select>
+            <select name="region_dong" id="region_dong" style="display: none;">
+                <option value="">-- 읍면동 선택 --</option>
+            </select>
         </div>
 
         <!-- Sidebar -->
@@ -69,12 +77,6 @@
         <script th:inline="javascript">
             $(document).ready(function () {
             });
-
-            /*빈 값 확인*/
-            function isEmpty(str) {
-                if (typeof str == "undefined" || str === "undefined" || str == null || $.trim(str).length < 1) return true;
-                else return false ;
-            }
 
             /*모임 저장*/
             function createClubs() {
