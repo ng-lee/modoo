@@ -1,18 +1,18 @@
 package com.modoo.global.entity;
 
 import com.modoo.domain.common.entity.BaseEntity;
-import com.modoo.global.dto.file.FileDto;
+import com.modoo.global.dto.file.ImageFileDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 
 @Entity
-@Table(name = "file")
+@Table(name = "image_file")
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class File extends BaseEntity {
+public class ImageFile extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,15 +37,5 @@ public class File extends BaseEntity {
     @Column(nullable = false)
     @Comment(value = "순서")
     private Integer fileOrder;
-
-    public static File dtoToEntity(FileDto dto) {
-        return File.builder()
-                .uploadPath(dto.getUploadPath())
-                .originalName(dto.getOriginalName())
-                .saveName(dto.getSaveName())
-                .extension(dto.getExtension())
-                .fileOrder(dto.getFileOrder())
-                .build();
-    }
 
 }
