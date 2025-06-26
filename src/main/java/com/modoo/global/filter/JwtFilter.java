@@ -39,7 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         AntPathMatcher antPathMatcher = new AntPathMatcher();
 
-        String[] patterns = {"/css/**", "/assets/**", "/favicon.ico", "/login", "/join"};
+        String[] patterns = {"/css/**", "/js/**", "/assets/**", "/favicon.ico", "/login", "/join", "/error/**"};
         String path = request.getRequestURI();
         String method = request.getMethod();
         boolean isPatternMatched = Arrays.stream(patterns)

@@ -31,7 +31,7 @@ public class SecurityConfig {
                         request.anyRequest().permitAll()
                 )
 //                .authorizeHttpRequests(request ->
-//                        request.requestMatchers("/login", "/", "/join", "/api/**").permitAll()
+//                        request.requestMatchers("/login", "/", "/join", "/api/**", "/error/**").permitAll()
 //                                .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exception ->
@@ -45,7 +45,7 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer configure() {
         return (web) -> web.ignoring()
-                .requestMatchers("/css/**");
+                .requestMatchers("/css/**", "/js/**");
     }
 
 }
