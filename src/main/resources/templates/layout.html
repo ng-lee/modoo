@@ -14,56 +14,57 @@
             <!-- Core theme CSS (includes Bootstrap)-->
             <link th:href="@{/css/style.css}" rel="stylesheet"/>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script src="/js/common.js"></script>
         </head>
         <body>
-        <!-- 헤더 -->
-        <header class="header">
-            <div class="logo">
-                <a th:href="@{/}">modoo</a>
-            </div>
-            <div class="region">
-                <button>부평구 ▼</button>
-            </div>
-            <div class="search">
-                <input type="text" placeholder="검색어를 입력하세요"/>
-            </div>
-            <div class="profile">
-                <a sec:authorize="isAuthenticated()" th:href="@{/myPage}">My page</a>
-                <a sec:authorize="isAnonymous()" th:href="@{/login}">👤</a>
-            </div>
-        </header>
+            <!-- 헤더 -->
+            <header class="header">
+                <div class="logo">
+                    <a th:href="@{/}">modoo</a>
+                </div>
+                <div class="region">
+                    <button>부평구 ▼</button>
+                </div>
+                <div class="search">
+                    <input type="text" placeholder="검색어를 입력하세요"/>
+                </div>
+                <div class="profile">
+                    <a sec:authorize="isAuthenticated()" th:href="@{/myPage}">My page</a>
+                    <a sec:authorize="isAnonymous()" th:href="@{/login}">👤</a>
+                </div>
+            </header>
 
-        <!-- 사이드바 -->
-        <nav class="sidebar">
-            <h3>category</h3>
-            <ul></ul>
-        </nav>
+            <!-- 사이드바 -->
+            <nav class="sidebar">
+                <h3>category</h3>
+                <ul></ul>
+            </nav>
 
-        <!-- Page content-->
-        <div class="container-fluid">
-            <th:block th:replace="${content}"></th:block>
-        </div>
+            <!-- Page content-->
+            <div class="container-fluid">
+                <th:block th:replace="${content}"></th:block>
+            </div>
 
-        <script th:inline="javascript">
-            $(document).ready(function() {
-                $.ajax({
-                    url: '/api/category',
-                    type: 'GET',
-                    success: function success(data) {
-                        let dataSize = data.length;
-                        let sidebar = $('.sidebar ul');
-                        let categoryList = `<li><a href="/clubs">전체</a></li>`;
-                        for(let i = 0; i < dataSize; i++) {
-                            categoryList += `<li><a href="/clubs?metadataCd=${data[i].metadataCd}">${data[i].contents}</a></li>`
-                        }
-                        sidebar.append(categoryList);
-                    },
-                    error: function error(error) {
-                        console.log(error)
+            <script th:inline="javascript">
+                $(document).ready(function() {
+                    ajaxGet('/api/category', renderCategoryList)
+                });
+
+                //카테고리 노출
+                function renderCategoryList(data) {
+                    let dataSize = data.length;
+
+                    let sidebar = $('.sidebar');
+                    let categoryListHtml = `<ul><li><a href="/clubs">전체</a></li>`;
+
+                    for(let i = 0; i < dataSize; i++) {
+                        categoryListHtml += `<li><a href="/clubs?metadataCd=${data[i].metadataCd}">${data[i].contents}</a></li>`
                     }
-                })
-            });
-        </script>
+
+                    categoryListHtml += `</ul>`;
+                    sidebar.append(categoryListHtml);
+                }
+            </script>
         </body>
     </th:block>
 </html>
