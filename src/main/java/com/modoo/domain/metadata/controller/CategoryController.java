@@ -3,6 +3,7 @@ package com.modoo.domain.metadata.controller;
 import com.modoo.domain.metadata.dto.MetaDataDto;
 import com.modoo.domain.metadata.service.MetaDataService;
 import com.modoo.global.constant.MetaDataType;
+import com.modoo.global.dto.CommonResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,9 @@ public class CategoryController {
 
     @ResponseBody
     @GetMapping("/api/category")
-    public List<MetaDataDto> getCategoryList() {
+    public CommonResponseDto<List<MetaDataDto>> getCategoryList() {
         List<MetaDataDto> categoryList = metaDataService.findByMetadataType(MetaDataType.CATEGORY.getType());
-        return categoryList;
+        return CommonResponseDto.success(categoryList);
     }
 }
 
