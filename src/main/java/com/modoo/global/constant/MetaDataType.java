@@ -1,4 +1,4 @@
-package com.modoo.domain.metadata.common;
+package com.modoo.global.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
