@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request ->
-                        request.requestMatchers("/login", "/", "/join", "/api/**").permitAll()
+                        request.requestMatchers("/login", "/", "/join", "/api/**", "/error/500").permitAll()
                                 .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exception ->
@@ -42,7 +42,7 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer configure() {
         return (web) -> web.ignoring()
-                .requestMatchers("/css/**");
+                .requestMatchers("/css/**", "/js/**");
     }
 
 }
