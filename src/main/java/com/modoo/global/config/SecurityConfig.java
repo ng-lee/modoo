@@ -28,8 +28,11 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request ->
-                        request.requestMatchers("/login", "/", "/join", "/api/**", "/error/500").permitAll()
-                                .anyRequest().authenticated())
+                        request.anyRequest().permitAll()
+                )
+//                .authorizeHttpRequests(request ->
+//                        request.requestMatchers("/login", "/", "/join", "/api/**").permitAll()
+//                                .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exception ->
                         exception.authenticationEntryPoint((request, response, authException) ->
