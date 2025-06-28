@@ -17,7 +17,7 @@ public class MetaDataService {
 
     @Cacheable(value = "metadata", key = "#type")
     public List<MetaDataDto> findByMetadataType(String type) {
-        return metadataRepository.findByMetadataTypeOrderByMetadataOrderDesc(type).stream()
+        return metadataRepository.findByMetadataTypeOrderByMetadataOrder(type).stream()
                 .map(MetaDataDto::fromEntity)
                 .collect(Collectors.toList());
     }
