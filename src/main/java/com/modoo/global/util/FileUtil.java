@@ -1,6 +1,7 @@
 package com.modoo.global.util;
 
 import com.modoo.global.entity.ImageFile;
+import com.modoo.global.error.exception.FileUploadException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -32,13 +33,13 @@ public class FileUtil {
     public ImageFile uploadFile(final MultipartFile multipartFile, final String fileType, Integer fileOrder) {
 
         if (multipartFile == null || multipartFile.isEmpty()) {
-            throw new RuntimeException("파일을 선택해주세요.");
+            throw new FileUploadException("파일을 선택해주세요.");
         }
 
         String extension = StringUtils.getFilenameExtension(multipartFile.getOriginalFilename());
 
         if (!isAllowedExtension(extension)) {
-            throw new RuntimeException("허용되지 않는 파일 확장자입니다.");
+            throw new FileUploadException("허용되지 않는 파일 확장자입니다.");
         }
 
         String saveName = generateSaveFilename(multipartFile.getOriginalFilename());
@@ -48,7 +49,7 @@ public class FileUtil {
         try {
             multipartFile.transferTo(uploadFile);
         } catch (IOException e) {
-            throw new RuntimeException("파일 업로드 중 오류가 발생했습니다.", e);
+            throw new FileUploadException("파일 업로드 중 오류가 발생했습니다.");
         }
 
         return ImageFile.builder()
@@ -68,11 +69,11 @@ public class FileUtil {
      */
     public List<ImageFile> uploadFiles(final List<MultipartFile> multipartFiles, final String fileType, Integer fileOrder) {
         if (multipartFiles == null || multipartFiles.isEmpty()) {
-            throw new RuntimeException("파일을 선택해주세요.");
+            throw new FileUploadException("파일을 선택해주세요.");
         }
 
         if (multipartFiles.size() > MAX_UPLOAD_COUNT) {
-            throw new RuntimeException("최대 " + MAX_UPLOAD_COUNT + "개 까지 업로드 가능합니다.");
+            throw new FileUploadException("최대 " + MAX_UPLOAD_COUNT + "개 까지 업로드 가능합니다.");
         }
 
         List<ImageFile> files = new ArrayList<>();
