@@ -3,7 +3,7 @@ package com.modoo.domain.metadata.controller;
 import com.modoo.domain.metadata.dto.MetaDataDto;
 import com.modoo.domain.metadata.service.MetaDataService;
 import com.modoo.global.constant.MetaDataType;
-import com.modoo.global.dto.CommonResponseDto;
+import com.modoo.global.dto.response.CommonResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

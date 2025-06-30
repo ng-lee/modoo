@@ -62,13 +62,4 @@ public class AuthController {
         return "redirect:/";
     }
 
-    @GetMapping("/join")
-    public String joinPage() {
-        return "/member/join";
-    }
-
-    @PostMapping("/join")
-    public String join() {
-        return "redirect:/login";
-    }
 }

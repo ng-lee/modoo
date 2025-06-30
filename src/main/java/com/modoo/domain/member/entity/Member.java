@@ -2,6 +2,7 @@ package com.modoo.domain.member.entity;
 
 import com.modoo.domain.common.entity.BaseEntity;
 import com.modoo.domain.member.dto.request.MemberRequest;
+import com.modoo.global.entity.ImageFile;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
@@ -43,8 +44,10 @@ public class Member extends BaseEntity {
     @Comment(value = "지역 코드")
     private Integer regionCd;
 
+    @OneToOne
+    @JoinColumn(name = "file_cd")
     @Comment(value = "프로필 사진")
-    private Integer profile;
+    private ImageFile profile;
 
     @Comment(value = "refresh token")
     private String refreshToken;
@@ -60,15 +63,19 @@ public class Member extends BaseEntity {
         this.refreshTokenExpirationTime = refreshTokenExpirationTime;
     }
 
+    public Member attachProfile(ImageFile imageFile) {
+        this.profile = imageFile;
+        return this;
+    }
+
     public static Member of(MemberRequest request) {
         return Member.builder()
                 .memberId(request.getMemberId())
                 .password(request.getPassword())
                 .name(request.getName())
                 .phone(request.getPhone())
-                .categoryCd(request.getCategoryCd())
-                .regionCd(request.getRegionCd())
-                .profile(request.getProfile())
+                .categoryCd(Integer.parseInt(request.getCategoryCd()))
+                .regionCd(Integer.parseInt(request.getRegionCd()))
                 .build();
     }
 

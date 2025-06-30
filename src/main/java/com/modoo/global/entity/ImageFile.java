@@ -1,7 +1,6 @@
 package com.modoo.global.entity;
 
 import com.modoo.domain.common.entity.BaseEntity;
-import com.modoo.global.dto.file.ImageFileDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
