@@ -20,11 +20,22 @@ public class CommonResponseDto<T> {
     /**
      * 성공 응답 객체
      * @param data
+     * @param responseCode
+     * @return
+     * @param <T>
+     */
+    public static <T> CommonResponseDto<T> success(T data, ResponseCode responseCode) {
+        return new CommonResponseDto<>(true, responseCode.getCode(), responseCode.getMessage(), data);
+    }
+
+    /**
+     * 성공 응답 객체 (응답 코드 X)
+     * @param data
      * @return
      * @param <T>
      */
     public static <T> CommonResponseDto<T> success(T data) {
-        return new CommonResponseDto<>(true, ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), data);
+        return new CommonResponseDto<>(true, null, null, data);
     }
 
     /**

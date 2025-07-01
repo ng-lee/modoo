@@ -109,8 +109,6 @@ function handleResponse(res, onSuccess, onError) {
             }
             return onSuccess(data); // 메시지 없으면 바로 실행
         }
-
-        alert(message || "요청이 정상적으로 처리되었습니다.");
     } else {
         if (onError) {
             return onError(res);
