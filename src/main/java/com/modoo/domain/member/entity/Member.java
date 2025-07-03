@@ -2,10 +2,13 @@ package com.modoo.domain.member.entity;
 
 import com.modoo.domain.common.entity.BaseEntity;
 import com.modoo.domain.member.dto.request.MemberRequest;
+import com.modoo.domain.metadata.entity.RegionDong;
 import com.modoo.global.entity.ImageFile;
+import com.modoo.global.util.GeometryUtil;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
+import org.locationtech.jts.geom.Point;
 
 import java.time.LocalDateTime;
 
@@ -36,18 +39,23 @@ public class Member extends BaseEntity {
     @Comment(value = "휴대폰 번호 (010-1234-4567)")
     private String phone;
 
-    @Column(length = 10, nullable = false)
-    @Comment(value = "이름")
-    private Integer categoryCd;
-
-    @Column(length = 10, nullable = false)
-    @Comment(value = "지역 코드")
-    private Integer regionCd;
-
     @OneToOne
     @JoinColumn(name = "file_cd")
     @Comment(value = "프로필 사진")
     private ImageFile profile;
+
+    @Column(length = 10, nullable = false)
+    @Comment(value = "카테고리 코드")
+    private Integer categoryCd;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_cd", nullable = false)
+    @Comment(value = "지역 코드")
+    private RegionDong region;
+
+    @Column(columnDefinition = "geometry(Point, 4326)")
+    @Comment("위도,경도 좌표")
+    private Point position;
 
     @Comment(value = "refresh token")
     private String refreshToken;
@@ -68,14 +76,17 @@ public class Member extends BaseEntity {
         return this;
     }
 
-    public static Member of(MemberRequest request) {
+    public static Member of(MemberRequest request, RegionDong region) {
         return Member.builder()
                 .memberId(request.getMemberId())
                 .password(request.getPassword())
                 .name(request.getName())
                 .phone(request.getPhone())
                 .categoryCd(Integer.parseInt(request.getCategoryCd()))
-                .regionCd(Integer.parseInt(request.getRegionCd()))
+                .region(region)
+                .position(GeometryUtil.getPoint(
+                        region.getLatitude().doubleValue(),
+                        region.getLongitude().doubleValue()))
                 .build();
     }
 
