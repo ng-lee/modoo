@@ -42,6 +42,16 @@ dependencies {
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 
+    // hibernate-spatial
+    // JPA와 PostGIS간 공간 데이터 매핑
+    implementation 'org.hibernate.orm:hibernate-spatial:6.1.7.Final'
+
+    // Java에서 공간 객체(Point) 사용
+    implementation 'org.locationtech.jts:jts-core:1.18.2'
+
+    // postgresql
+    runtimeOnly 'org.postgresql:postgresql'
+
     // queryDSL
 //    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
 //    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
@@ -50,8 +60,8 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

@@ -3,6 +3,8 @@ package com.modoo.domain.member.service;
 import com.modoo.domain.member.dto.request.MemberRequest;
 import com.modoo.domain.member.entity.Member;
 import com.modoo.domain.member.repository.MemberRepository;
+import com.modoo.domain.metadata.entity.RegionDong;
+import com.modoo.domain.metadata.repository.RegionDongRepository;
 import com.modoo.global.constant.FileType;
 import com.modoo.global.entity.ImageFile;
 import com.modoo.global.service.FileService;
@@ -22,6 +24,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final FileService fileService;
+    private final RegionDongRepository regionDongRepository;
 
     /**
      * 회원 가입
@@ -31,7 +34,11 @@ public class MemberService {
     @Transactional
     public Long create(MemberRequest request) {
         request.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
-        Member member = Member.of(request);
+
+        RegionDong region = regionDongRepository.findById(Long.parseLong(request.getRegionCd()))
+                .orElseThrow(() -> new RuntimeException("지역 코드가 올바르지 않습니다."));
+
+        Member member = Member.of(request, region);
 
         // 파일 저장
         if(request.getProfile() != null) {
