@@ -8,28 +8,20 @@ import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 @Getter
 @Setter
 @ToString
 @Builder
-public class MemberAuth implements UserDetails, OAuth2User {
+public class MemberAuth implements UserDetails {
 
     private Long memberCd;
     private String memberId;
     private String password;
     private String name;
-    private Map<String, Object> attributes; // 소셜 로그인 정보
-
-    @Override
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
