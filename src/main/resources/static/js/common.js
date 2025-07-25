@@ -197,25 +197,99 @@ function showValidationErrors(errorMap) {
     });
 }
 
-// 파일 미리보기
+let currentFiles = []; // 현재 선택된 파일들 저장
+
+// 단건 파일 미리보기
 function previewImages(input) {
     const previewContainer = document.getElementById('preview_container');
     previewContainer.innerHTML = ''; // 기존 미리보기 초기화
 
     if (input.files && input.files.length > 0) {
-        Array.from(input.files).forEach(file => {
+        currentFiles = Array.from(input.files); // 파일 배열 저장
+
+        currentFiles.forEach((file, index) => {
             const reader = new FileReader();
             reader.onload = function (e) {
+                // 이미지 래퍼 div 생성
+                const wrapper = document.createElement('div');
+                wrapper.className = 'image-wrapper';
+
+                // 이미지 요소 생성
                 const img = document.createElement('img');
                 img.src = e.target.result;
                 img.style.width = '200px';
-                img.style.marginRight = '10px';
-                previewContainer.appendChild(img);
+
+                // 삭제 버튼 생성
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.innerHTML = '×';
+                deleteBtn.onclick = function() {
+                    removeImage(index);
+                };
+
+                // 래퍼에 이미지와 삭제 버튼 추가
+                wrapper.appendChild(img);
+                wrapper.appendChild(deleteBtn);
+
+                previewContainer.appendChild(wrapper);
             };
             reader.readAsDataURL(file);
         });
     } else {
         // 파일이 없으면 미리보기 초기화
         previewContainer.innerHTML = '';
+        currentFiles = [];
     }
+}
+
+// 이미지 삭제
+function removeImage(index) {
+    // 해당 인덱스의 파일을 제거
+    currentFiles.splice(index, 1);
+
+    // FileList는 읽기 전용이므로 DataTransfer를 사용해서 새로운 FileList 생성
+    const dt = new DataTransfer();
+    currentFiles.forEach(file => {
+        dt.items.add(file);
+    });
+
+    // input의 files를 업데이트
+    document.getElementById('file').files = dt.files;
+
+    renderPreview();
+}
+
+// 미리보기 렌더링
+function renderPreview() {
+    const previewContainer = document.getElementById('preview_container');
+    previewContainer.innerHTML = '';
+
+    currentFiles.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            // 이미지 래퍼 div 생성
+            const wrapper = document.createElement('div');
+            wrapper.className = 'image-wrapper';
+
+            // 이미지 요소 생성
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.style.width = '200px';
+
+            // 삭제 버튼 생성
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.innerHTML = '×';
+            deleteBtn.onclick = function() {
+                removeImage(index);
+            };
+
+            // 래퍼에 이미지와 삭제 버튼 추가
+            wrapper.appendChild(img);
+            wrapper.appendChild(deleteBtn);
+
+            previewContainer.appendChild(wrapper);
+        };
+        reader.readAsDataURL(file);
+    });
 }
