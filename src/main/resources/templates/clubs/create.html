@@ -47,7 +47,9 @@
 
                 <div class="form-group">
                     <label>대표 이미지</label>
-                    <div class="image-box"></div>
+                    <input type="file" id="file" name="file" onchange="previewImages(this)" style="display: none;">
+                    <button type="button" onclick="document.getElementById('file').click();">이미지 선택</button>
+                    <div id="preview_container"></div>
                 </div>
 
                 <div class="form-group">
@@ -108,7 +110,8 @@
                 param.categoryCd = $('select[name="category"]').val();
                 param.regionCd = 1;
 
-                $.ajax({
+                ajaxPostWithParams("/api/clubs/create", param, successFu, errorFu)
+                /*$.ajax({
                     type: "POST",
                     url: "/api/clubs/create",
                     contentType: 'application/json',
@@ -122,7 +125,15 @@
                         console.error("상태 코드:", status);
                         console.error("응답:", xhr.responseText);
                     }
-                });
+                });*/
+            }
+
+            function successFu() {
+                alert("글이 성공적으로 저장되었습니다.");
+            }
+
+            function errorFu() {
+                alert("오류 발생");
             }
         </script>
     </body>
