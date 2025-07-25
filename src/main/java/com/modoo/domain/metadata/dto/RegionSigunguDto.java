@@ -13,13 +13,13 @@ import lombok.ToString;
 public class RegionSigunguDto {
     private Long sigunguCd;
     private String sigunguName;
-    private Integer sidoCd;
+    private Long sidoCd;
 
     public static RegionSigunguDto fromEntity(RegionSigungu regionSigungu) {
         return RegionSigunguDto.builder()
                 .sigunguCd(regionSigungu.getSigunguCd())
                 .sigunguName(regionSigungu.getSigunguName())
-                .sidoCd(regionSigungu.getSidoCd())
+                .sidoCd(regionSigungu.getSidoCd().getSidoCd())
                 .build();
     }
 }

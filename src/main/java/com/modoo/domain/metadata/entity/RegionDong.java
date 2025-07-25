@@ -23,9 +23,10 @@ public class RegionDong extends BaseEntity {
     @Comment(value = "읍면동 이름")
     private String dongName;
 
-    @Column(length = 10, nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="sigungu_cd")
     @Comment(value = "시군구 코드")
-    private Integer sigunguCd;
+    private RegionSigungu sigunguCd;
 
     @Column(length = 10, nullable = false)
     @Comment(value = "위도")
