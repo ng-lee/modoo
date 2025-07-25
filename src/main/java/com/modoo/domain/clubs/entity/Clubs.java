@@ -37,7 +37,7 @@ public class Clubs extends BaseEntity {
     @Comment(value = "카테고리 코드")
     private Metadata metadata;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="main_file_cd")
     @Comment(value = "대표이미지 코드")
     private ImageFile imageFile;

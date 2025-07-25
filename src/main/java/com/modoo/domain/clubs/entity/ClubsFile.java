@@ -1,6 +1,7 @@
 package com.modoo.domain.clubs.entity;
 
 import com.modoo.domain.common.entity.BaseEntity;
+import com.modoo.global.entity.ImageFile;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
@@ -17,11 +18,14 @@ public class ClubsFile extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clubsFileCd;
 
-    @Column(length = 20, nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="clubs_cd")
     @Comment(value = "모임 코드")
-    private String clubsCd;
+    private Clubs clubs;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="file_cd")
     @Comment(value = "파일 코드")
-    private String fileCd;
+    private ImageFile imageFile;
 
 }
