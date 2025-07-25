@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class RegionDongDto {
     private Long dongCd;
     private String dongName;
-    private Integer sigunguCd;
+    private Long sigunguCd;
     private BigDecimal latitude;
     private BigDecimal longitude;
 
@@ -23,7 +23,7 @@ public class RegionDongDto {
         return RegionDongDto.builder()
                 .dongCd(regionDong.getDongCd())
                 .dongName(regionDong.getDongName())
-                .sigunguCd(regionDong.getSigunguCd())
+                .sigunguCd(regionDong.getSigunguCd().getSigunguCd())
                 .latitude(regionDong.getLatitude())
                 .latitude(regionDong.getLongitude())
                 .build();

@@ -21,7 +21,8 @@ public class RegionSigungu extends BaseEntity {
     @Comment(value = "시군구 이름")
     private String sigunguName;
 
-    @Column(length = 10, nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="sido_cd")
     @Comment(value = "시도 코드")
-    private Integer sidoCd;
+    private RegionSido sidoCd;
 }
