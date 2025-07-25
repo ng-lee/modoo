@@ -38,7 +38,7 @@ public class RegionService {
      * 시군구 리스트 조회
      * */
     public List<RegionSigunguDto> findBySidoCd(Integer sidoCd) {
-        List<RegionSigunguDto> sigunguList = regionSigunguRepository.findBySidoCd(sidoCd).stream()
+        List<RegionSigunguDto> sigunguList = regionSigunguRepository.findBySidoCd_sidoCd(Long.valueOf(sidoCd)).stream()
                 .map(RegionSigunguDto::fromEntity)
                 .collect(Collectors.toList());
         return sigunguList;
@@ -48,7 +48,7 @@ public class RegionService {
      * 읍면동 리스트 조회
      * */
     public List<RegionDongDto> findBySigunguCd(Integer sigunguCd) {
-        List<RegionDongDto> dongList = regionDongRepository.findBySigunguCd(sigunguCd).stream()
+        List<RegionDongDto> dongList = regionDongRepository.findBySigunguCd_sigunguCd(Long.valueOf(sigunguCd)).stream()
                 .map(RegionDongDto::fromEntity)
                 .collect(Collectors.toList());
         return dongList;

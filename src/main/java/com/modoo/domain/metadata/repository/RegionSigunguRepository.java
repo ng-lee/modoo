@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface RegionSigunguRepository extends JpaRepository<RegionSigungu, Long> {
-    List<RegionSigungu> findBySidoCd(Integer sidoCd);
+    List<RegionSigungu> findBySidoCd_sidoCd(Long sidoCd);
 }
