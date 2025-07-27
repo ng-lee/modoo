@@ -16,16 +16,12 @@ public class RegionDongDto {
     private Long dongCd;
     private String dongName;
     private Long sigunguCd;
-    private BigDecimal latitude;
-    private BigDecimal longitude;
 
     public static RegionDongDto fromEntity(RegionDong regionDong) {
         return RegionDongDto.builder()
                 .dongCd(regionDong.getDongCd())
                 .dongName(regionDong.getDongName())
                 .sigunguCd(regionDong.getSigunguCd().getSigunguCd())
-                .latitude(regionDong.getLatitude())
-                .latitude(regionDong.getLongitude())
                 .build();
     }
 }

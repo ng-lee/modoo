@@ -4,6 +4,7 @@ import com.modoo.domain.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
+import org.locationtech.jts.geom.Point;
 
 import java.math.BigDecimal;
 
@@ -28,11 +29,7 @@ public class RegionDong extends BaseEntity {
     @Comment(value = "시군구 코드")
     private RegionSigungu sigunguCd;
 
-    @Column(length = 10, nullable = false)
-    @Comment(value = "위도")
-    private BigDecimal latitude;
-
-    @Column(length = 10, nullable = false)
-    @Comment(value = "경도")
-    private BigDecimal longitude;
+    @Column(columnDefinition = "geometry(Point, 4326)", nullable = false)
+    @Comment("위도,경도 좌표")
+    private Point position;
 }
