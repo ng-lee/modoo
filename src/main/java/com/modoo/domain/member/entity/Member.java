@@ -53,7 +53,7 @@ public class Member extends BaseEntity {
     @Comment(value = "지역 코드")
     private RegionDong region;
 
-    @Column(columnDefinition = "geometry(Point, 4326)")
+    @Column(columnDefinition = "geometry(Point, 4326)", nullable = false)
     @Comment("위도,경도 좌표")
     private Point position;
 
@@ -84,9 +84,7 @@ public class Member extends BaseEntity {
                 .phone(request.getPhone())
                 .categoryCd(Integer.parseInt(request.getCategoryCd()))
                 .region(region)
-                .position(GeometryUtil.getPoint(
-                        region.getLatitude().doubleValue(),
-                        region.getLongitude().doubleValue()))
+                .position(region.getPosition())
                 .build();
     }
 
