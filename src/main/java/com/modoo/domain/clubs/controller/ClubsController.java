@@ -11,10 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,10 +45,10 @@ public class ClubsController {
      * 모임 생성
      */
     @ResponseBody
-    @PostMapping("/api/clubs/create")
-    public Map<String, Object> clubsCreate(@RequestBody ClubsRequest clubsRequest) {
+    @PostMapping(value = "/api/clubs/create",  headers = ("content-type=multipart/*"))
+    public Map<String, Object> clubsCreate(@ModelAttribute ClubsRequest clubsRequest, @RequestParam("files") MultipartFile[] files, @RequestParam("mainFile") MultipartFile mainFile) {
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap = clubsService.create(clubsRequest);
+        resultMap = clubsService.create(clubsRequest, files, mainFile);
         return resultMap;
     }
 

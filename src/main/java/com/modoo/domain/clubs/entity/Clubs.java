@@ -51,13 +51,14 @@ public class Clubs extends BaseEntity {
     @Comment(value = "정원")
     private Integer capacity;
 
-    public static Clubs of(ClubsRequest request, RegionDong region, Metadata metadata) {
+    public static Clubs of(ClubsRequest request, RegionDong region, Metadata metadata, ImageFile imageFile) {
         return Clubs.builder()
                 .name(request.getName())
                 .contents(request.getContents())
                 .metadata(metadata)
                 .capacity(request.getCapacity())
                 .regionDong(region)
+                .imageFile(imageFile)
                 .build();
     }
 }

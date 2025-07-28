@@ -293,3 +293,57 @@ function renderPreview() {
         reader.readAsDataURL(file);
     });
 }
+
+// 다중파일 업로드
+function rendersPreviews(input) {
+    const previewContainer = document.getElementById('sub_container'); // id로 직접 찾기
+
+    const existingCount = previewContainer.querySelectorAll('.image-wrapper').length;
+    const files = Array.from(input.files).slice(0, 5 - existingCount);
+
+    files.forEach((file) => {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'image-wrapper';
+
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.alt = file.name;
+            img.style.maxWidth = '150px';
+            img.style.maxHeight = '150px';
+
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'file';
+            hiddenInput.name = 'files';
+            hiddenInput.hidden = true;
+
+            // 삭제 버튼 생성
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.innerHTML = '×';
+            deleteBtn.onclick = function() {
+                deleteImg(this);
+            };
+
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            hiddenInput.files = dataTransfer.files;
+
+            wrapper.appendChild(img);
+            wrapper.appendChild(deleteBtn);
+            wrapper.appendChild(hiddenInput);
+
+            previewContainer.appendChild(wrapper);
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    input.value = ''; // 같은 파일 선택할 수 있게 초기화
+}
+
+function deleteImg(el) {
+    el.parentElement.remove();
+}
