@@ -5,6 +5,7 @@
         <title>모임 생성</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script th:src="@{/js/common.js}"></script>
+        <link th:href="@{/css/preview-image-style.css}" rel="stylesheet"/>
     </head>
     <body>
         <!-- Header -->
@@ -47,17 +48,16 @@
 
                 <div class="form-group">
                     <label>대표 이미지</label>
-                    <input type="file" id="file" name="file" onchange="previewImages(this)" style="display: none;">
-                    <button type="button" onclick="document.getElementById('file').click();">이미지 선택</button>
+                    <input type="file" id="main_file" name="main_file" onchange="previewImages(this)" style="display: none;">
+                    <button type="button" onclick="document.getElementById('main_file').click();">이미지 선택</button>
                     <div id="preview_container"></div>
                 </div>
 
                 <div class="form-group">
                     <label>첨부 이미지 (선택)</label>
-                    <div class="image-upload-row">
-                        <div class="image-box small"></div>
-                        <div class="image-box small"></div>
-                    </div>
+                    <input type="file" id="sub_file" accept="image/*" onchange="rendersPreviews(this)" style="display: none;">
+                    <button type="button" onclick="document.getElementById('sub_file').click();">이미지 선택</button>
+                    <div id="sub_container"></div>
                 </div>
 
                 <div class="form-group">
@@ -78,13 +78,13 @@
         </div>
         <script th:inline="javascript">
             $(document).ready(function () {
+
             });
 
             /*모임 저장*/
             function createClubs() {
-                let param = {};
+                const formData = new FormData;
                 if (isEmpty($('#clubs_name').val())) {
-                    console.log($('#clubs_name').val());
                     alert('모임명을 입력해주세요.');
                     $('#clubs_name').focus();
                     return false;
@@ -104,35 +104,40 @@
                     $('select[name="category"]').focus();
                     return false;
                 }
-                param.name = $('#clubs_name').val();
-                param.contents = $('#clubs_contents').val();
-                param.capacity = $('#clubs_capacity').val();
-                param.categoryCd = $('select[name="category"]').val();
-                param.regionCd = 1;
+                if (isEmpty($('select[name="region_dong"]').val())) {
+                    alert('지역을 선택해주세요.');
+                    $('select[name="region_dong"]').focus();
+                    return false;
+                }
+                if (!$('#main_file')[0].files || !$('#main_file')[0].files[0]) {
+                    alert('대표이미지를 선택해주세요.');
+                    $('#main_file').focus();
+                    return false;
+                }
+                formData.append('name', $('#clubs_name').val());
+                formData.append('contents', $('#clubs_contents').val());
+                formData.append('capacity', $('#clubs_capacity').val());
+                formData.append('categoryCd', $('select[name="category"]').val());
+                formData.append('regionCd', $('select[name="region_dong"]').val());
+                formData.append('mainFile', $('#main_file')[0].files[0]);
 
-                ajaxPostWithParams("/api/clubs/create", param, successFu, errorFu)
-                /*$.ajax({
-                    type: "POST",
-                    url: "/api/clubs/create",
-                    contentType: 'application/json',
-                    data: JSON.stringify(param),
-                    success: function(response) {
-                        console.log(response);
-                        alert("글이 성공적으로 저장되었습니다.");
-                    },
-                    error: function(xhr, status, error) {
-                        alert("오류 발생");
-                        console.error("상태 코드:", status);
-                        console.error("응답:", xhr.responseText);
+                // 첨부파일 리스트
+                const allFiles = [];
+                $('input[name="files"]').each(function () {
+                    if (this.files.length > 0) {
+                        formData.append('files', this.files[0]);
                     }
-                });*/
+                });
+                // ajaxPostWithParams("/api/clubs/create", param, successFu, errorFu)
+                ajaxFileUpload("/api/clubs/create", formData, successFu, errorFu)
+
             }
 
             function successFu() {
-                alert("글이 성공적으로 저장되었습니다.");
+                location.href = '/';
             }
 
-            function errorFu() {
+            function errorFu(res) {
                 alert("오류 발생");
             }
         </script>
