@@ -1,5 +1,6 @@
 package com.modoo.domain.metadata.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.modoo.domain.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,6 +22,7 @@ public class RegionSigungu extends BaseEntity {
     @Comment(value = "시군구 이름")
     private String sigunguName;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="sido_cd")
     @Comment(value = "시도 코드")

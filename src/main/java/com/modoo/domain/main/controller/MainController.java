@@ -1,12 +1,10 @@
 package com.modoo.domain.main.controller;
 
-import com.modoo.global.constant.MetaDataType;
-import com.modoo.domain.metadata.dto.MetaDataDto;
-import com.modoo.domain.metadata.service.MetaDataService;
+import com.modoo.domain.metadata.dto.SidoSigunguDto;
+import com.modoo.domain.metadata.service.RegionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -14,10 +12,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MainController {
 
-    private final MetaDataService metaDataService;
+    private final RegionService regionService;
 
     @GetMapping("/")
     public String home() {
+
+        //전체 시군구 리스트
+        List<SidoSigunguDto> allSidoSigunguList = regionService.findAllSidoSigungu();
         return "/main";
     }
 

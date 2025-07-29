@@ -1,12 +1,6 @@
 package com.modoo.domain.metadata.service;
 
-import com.modoo.domain.metadata.dto.MetaDataDto;
-import com.modoo.domain.metadata.dto.RegionDongDto;
-import com.modoo.domain.metadata.dto.RegionSidoDto;
-import com.modoo.domain.metadata.dto.RegionSigunguDto;
-import com.modoo.domain.metadata.entity.RegionSido;
-import com.modoo.domain.metadata.entity.RegionSigungu;
-import com.modoo.domain.metadata.repository.MetadataRepository;
+import com.modoo.domain.metadata.dto.*;
 import com.modoo.domain.metadata.repository.RegionDongRepository;
 import com.modoo.domain.metadata.repository.RegionSidoRepository;
 import com.modoo.domain.metadata.repository.RegionSigunguRepository;
@@ -53,4 +47,23 @@ public class RegionService {
                 .collect(Collectors.toList());
         return dongList;
     }
+
+    /**
+     * 전체 시군구 리스트 조회
+     */
+    public List<SidoSigunguDto> findAllSidoSigungu() {
+        return regionSidoRepository.findAllSidoSigungu().stream()
+                .map(sido -> SidoSigunguDto.builder()
+                        .sidoCd(sido.getSidoCd())
+                        .sidoName(sido.getSidoName())
+                        .sigunguDtoList(
+                                sido.getSigunguList().stream()
+                                        .map(sigungu -> new SidoSigunguDto.SigunguDto(sigungu.getSigunguCd(), sigungu.getSigunguName()))
+                                        .collect(Collectors.toList())
+                        )
+                        .build()
+                )
+                .toList();
+    }
+
 }
