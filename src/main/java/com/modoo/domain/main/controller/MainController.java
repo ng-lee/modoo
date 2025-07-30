@@ -1,6 +1,6 @@
 package com.modoo.domain.main.controller;
 
-import com.modoo.domain.metadata.dto.SidoSigunguDto;
+import com.modoo.domain.metadata.dto.AllRegionDto;
 import com.modoo.domain.metadata.service.RegionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ public class MainController {
     public String home() {
 
         //전체 시군구 리스트
-        List<SidoSigunguDto> allSidoSigunguList = regionService.findAllSidoSigungu();
+        List<AllRegionDto> allSidoSigunguList = regionService.findAllSidoSigungu();
         return "/main";
     }
 

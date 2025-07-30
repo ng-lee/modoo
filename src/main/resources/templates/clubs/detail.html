@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout :: setContent(~{this::content})}">
+
+    <th:block th:fragment="content">
+        <!-- Main Content -->
+        <div class="main-content">
+            <section>
+                <h2>모임 상세</h2>
+                <div class="form-group">
+                    <label for="region_sido">지역</label>
+                    <select name="region_sido" id="region_sido" onchange="getSigunguList(this);">
+                        <option value="">-- 시도 선택 --</option>
+                    </select>
+                    <select name="region_sigungu" id="region_sigungu" onchange="getDongList(this);">
+                    </select>
+                    <select name="region_dong" id="region_dong">
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">category</label>
+                    <select name="category" id="category">
+                        <option value="">-- 카테고리 선택 --</option>
+                        <th:block th:each="category : ${categoryList}">
+                            <option th:value="${category.metadataCd}" th:text="${category.contents}"
+                                    th:selected="${clubs.categoryCd == category.metadataCd}"></option>
+                        </th:block>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="clubs_name">모임명</label>
+                    <input type="text" id="clubs_name" th:value="${clubs.name}"/>
+                </div>
+
+                <div class="form-group">
+                    <label>대표 이미지</label>
+                    <input type="file" id="main_file" name="main_file" onchange="previewImages(this)" style="display: none;">
+                    <button type="button" onclick="document.getElementById('main_file').click();">이미지 선택</button>
+                    <div id="preview_container"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>첨부 이미지 (선택)</label>
+                    <input type="file" id="sub_file" accept="image/*" onchange="rendersPreviews(this)" style="display: none;">
+                    <button type="button" onclick="document.getElementById('sub_file').click();">이미지 선택</button>
+                    <div id="sub_container"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="clubs_capacity">정원</label>
+                    <input type="text" min="0" max="100" id="clubs_capacity" th:value="${clubs.capacity}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="clubs_contents">모임 상세 내용</label>
+                    <textarea class="detail-textarea" rows="5" id="clubs_contents" th:text="${clubs.contents}"></textarea>
+                </div>
+
+                <div class="form-buttons">
+                    <button class="btn submit" onclick="modifyClubs();">수정</button>
+                </div>
+            </section>
+        </div>
+        <script th:inline="javascript">
+            let allRegionList = [];
+            allRegionList = [[${allRegionList}]];
+            for (let i = 0; i < allRegionList.length; i++) {
+                console.log(allRegionList[i]);
+            }
+            console.log(allRegionList);
+            $(document).ready(function () {
+            });
+        </script>
+    </th:block>
+</th:block>
+</html>
