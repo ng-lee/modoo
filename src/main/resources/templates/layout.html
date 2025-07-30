@@ -229,7 +229,7 @@
                     if (currentSigungu && currentSigungu.dongList) {
                         currentSigungu.dongList.forEach(dong => {
                             const dongItem = document.createElement('div');
-                            dongItem.className = `dong-item${selectedDongCd === dong.dongCd ? 'selected' : ''}`;
+                            dongItem.className = `dong-item${selectedDongCd === dong.dongCd ? ' selected' : ''}`;
                             dongItem.setAttribute("data-dong-cd", dong.dongCd);
                             dongItem.textContent = dong.dongName;
 
