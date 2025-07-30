@@ -37,14 +37,16 @@
 
                 <div class="form-group">
                     <label>대표 이미지</label>
-                    <input type="file" id="main_file" name="main_file" onchange="previewImages(this)" style="display: none;">
+                    <input type="file" id="main_file" name="main_file" onchange="previewImages(this)"
+                           style="display: none;">
                     <button type="button" onclick="document.getElementById('main_file').click();">이미지 선택</button>
                     <div id="preview_container"></div>
                 </div>
 
                 <div class="form-group">
                     <label>첨부 이미지 (선택)</label>
-                    <input type="file" id="sub_file" accept="image/*" onchange="rendersPreviews(this)" style="display: none;">
+                    <input type="file" id="sub_file" accept="image/*" onchange="rendersPreviews(this)"
+                           style="display: none;">
                     <button type="button" onclick="document.getElementById('sub_file').click();">이미지 선택</button>
                     <div id="sub_container"></div>
                 </div>
@@ -56,7 +58,8 @@
 
                 <div class="form-group">
                     <label for="clubs_contents">모임 상세 내용</label>
-                    <textarea class="detail-textarea" rows="5" id="clubs_contents" th:text="${clubs.contents}"></textarea>
+                    <textarea class="detail-textarea" rows="5" id="clubs_contents"
+                              th:text="${clubs.contents}"></textarea>
                 </div>
 
                 <div class="form-buttons">
@@ -67,12 +70,90 @@
         <script th:inline="javascript">
             let allRegionList = [];
             allRegionList = [[${allRegionList}]];
-            for (let i = 0; i < allRegionList.length; i++) {
-                console.log(allRegionList[i]);
-            }
-            console.log(allRegionList);
+
             $(document).ready(function () {
+
+
             });
+
+            // 검색하려는 dongCd 값
+            let searchDongCd = [[${clubs.regionCd}]];
+
+            function findSidoSigunguByDongCd(dongCd) {
+                // 결과를 담을 변수
+                let result = null;
+                // allRegionList를 순회하며 해당 dongCd를 포함하는 sido와 sigungu 찾기
+                $.each(allRegionList, function (i, sido) {
+                    $.each(sido.sigunguList, function (j, sigungu) {
+                        let foundDong = sigungu.dongList.find(function (dong) {
+                            return dong.dongCd === dongCd;
+                        });
+
+                        // 해당 dongCd가 있으면 result에 해당 sido, sigungu 반환
+                        if (foundDong) {
+                            result = {
+                                sido: sido,
+                                sigungu: sigungu,
+                                dong: foundDong,
+                                dongList: sigungu.dongList,
+                                sigunguList: sido.sigunguList,
+                                sidoList: allRegionList
+                            };
+                            return false; // 일치하는 항목을 찾으면 더 이상 반복하지 않음
+                        }
+                    });
+                    if (result) return false; // result가 있으면 더 이상 반복하지 않음
+                });
+
+                return result;
+            }
+
+            // 검색한 결과
+            var result = findSidoSigunguByDongCd(searchDongCd);
+
+            // 결과 출력
+            if (result) {
+                const sidoSelect = document.getElementById("region_sido");
+                const sigunguSelect = document.getElementById("region_sigungu");
+                const dongSelect = document.getElementById("region_dong");
+
+                sidoSelect.innerHTML = '<option value="">시도 선택</option>';
+                sigunguSelect.innerHTML = '<option value="">시군구 선택</option>';
+                dongSelect.innerHTML = '<option value="">읍면동 선택</option>';
+
+                result.sidoList.forEach(sido => {
+                    const option = document.createElement("option");
+                    option.value = sido.sidoCd;
+                    option.textContent = sido.sidoName;
+                    if (sido.sidoCd === result.sido.sidoCd) {
+                        option.selected = true;
+                    }
+                    sidoSelect.appendChild(option);
+                });
+
+                result.sigunguList.forEach(sigungu => {
+                    const option = document.createElement("option");
+                    option.value = sigungu.sigunguCd;
+                    option.textContent = sigungu.sigunguName;
+                    if (sigungu.sigunguCd === result.sigungu.sigunguCd) {
+                        option.selected = true;
+                    }
+                    sigunguSelect.appendChild(option);
+                });
+
+                result.dongList.forEach(dong => {
+                    const option = document.createElement("option");
+                    option.value = dong.dongCd;
+                    option.textContent = dong.dongName;
+                    if (dong.dongCd === result.dong.dongCd) {
+                        option.selected = true;
+                    }
+                    dongSelect.appendChild(option);
+                });
+            } else {
+
+            }
+
         </script>
     </th:block>
 </th:block>
