@@ -25,6 +25,5 @@ public class AllRegionDto {
     public static class DongDto {
         private Long dongCd;
         private String dongName;
-        private Point position;
     }
 }

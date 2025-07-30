@@ -49,6 +49,14 @@ public class RegionService {
     }
 
     /**
+     * 지역 드롭다운 세팅
+     */
+    public MainRegionDto getInitialRegionData(Long dongCd) {
+        return MainRegionDto.from(regionDongRepository.getInitialRegionData(dongCd));
+    }
+
+
+    /**
      * 전체 시-구-동 리스트 조회
      */
     public List<AllRegionDto> findAllSidoSigungu() {
@@ -60,7 +68,7 @@ public class RegionService {
                                 sido.getSigunguList().stream()
                                         .map(sigungu -> {
                                             List<AllRegionDto.DongDto> dongList = sigungu.getDongList().stream()
-                                                    .map(dong -> new AllRegionDto.DongDto(dong.getDongCd(), dong.getDongName(), dong.getPosition()))
+                                                    .map(dong -> new AllRegionDto.DongDto(dong.getDongCd(), dong.getDongName()))
                                                     .collect(Collectors.toList());
                                             return new AllRegionDto.SigunguDto(sigungu.getSigunguCd(), sigungu.getSigunguName(), dongList);
                                         })
