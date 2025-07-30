@@ -49,16 +49,21 @@ public class RegionService {
     }
 
     /**
-     * 전체 시군구 리스트 조회
+     * 전체 시-구-동 리스트 조회
      */
-    public List<SidoSigunguDto> findAllSidoSigungu() {
+    public List<AllRegionDto> findAllSidoSigungu() {
         return regionSidoRepository.findAllSidoSigungu().stream()
-                .map(sido -> SidoSigunguDto.builder()
+                .map(sido -> AllRegionDto.builder()
                         .sidoCd(sido.getSidoCd())
                         .sidoName(sido.getSidoName())
-                        .sigunguDtoList(
+                        .sigunguList(
                                 sido.getSigunguList().stream()
-                                        .map(sigungu -> new SidoSigunguDto.SigunguDto(sigungu.getSigunguCd(), sigungu.getSigunguName()))
+                                        .map(sigungu -> {
+                                            List<AllRegionDto.DongDto> dongList = sigungu.getDongList().stream()
+                                                    .map(dong -> new AllRegionDto.DongDto(dong.getDongCd(), dong.getDongName(), dong.getPosition()))
+                                                    .collect(Collectors.toList());
+                                            return new AllRegionDto.SigunguDto(sigungu.getSigunguCd(), sigungu.getSigunguName(), dongList);
+                                        })
                                         .collect(Collectors.toList())
                         )
                         .build()
