@@ -4,6 +4,7 @@ import com.modoo.domain.clubs.dto.request.ClubsRequest;
 import com.modoo.domain.clubs.dto.response.ClubsResponse;
 import com.modoo.domain.clubs.entity.Clubs;
 import com.modoo.domain.clubs.service.ClubsService;
+import com.modoo.domain.metadata.dto.AllRegionDto;
 import com.modoo.domain.metadata.dto.RegionSidoDto;
 import com.modoo.domain.metadata.service.RegionService;
 import com.modoo.global.constant.MetaDataType;
@@ -68,11 +69,11 @@ public class ClubsController {
 
         // 모임 정보 조회
         ClubsResponse clubsResponse = clubsService.getClubsDetail(clubsCd);
-        // 모임 정보 - region_cd 로 동 리스트 부르고
-        // 동 리스트로 얻은 sigungu_cd 로 시군구 리스트 부르고
-        // 시군구 리스트로 얻은 sido_cd 불러오기
+        //전체 시군구 리스트
+        List<AllRegionDto> allSidoSigunguList = regionService.findAllSidoSigungu();
 
         modelMap.addAttribute("clubs", clubsResponse);
+        modelMap.addAttribute("allRegionList", allSidoSigunguList);
         return "clubs/detail";
     }
 }

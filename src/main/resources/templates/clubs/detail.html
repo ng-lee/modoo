@@ -12,19 +12,10 @@
                     <label for="region_sido">지역</label>
                     <select name="region_sido" id="region_sido" onchange="getSigunguList(this);">
                         <option value="">-- 시도 선택 --</option>
-                        <th:block th:each="sido : ${sidoList}">
-                            <!--                    <option th:value="${sido.sidoCd}" th:text="${sido.sidoName}" th:selected="${clubs.sido_cd == sido.sidoCd}"></option>-->
-                        </th:block>
                     </select>
                     <select name="region_sigungu" id="region_sigungu" onchange="getDongList(this);">
-                        <th:block th:each="sigungu : ${sigunguList}">
-                            <!--                    <option th:value="${sigungu.sigunguCd}" th:text="${sigungu.sigunguName}" th:selected="${clubs.sigungu_cd == sigungu.sigunguCd}"></option>-->
-                        </th:block>
                     </select>
                     <select name="region_dong" id="region_dong">
-                        <th:block th:each="dong : ${dongList}">
-                            <!--                    <option th:value="${dong.dongCd}" th:text="${dong.dongName}" th:selected="${clubs.region_cd == dong.dongCd}"></option>-->
-                        </th:block>
                     </select>
                 </div>
 
@@ -33,7 +24,8 @@
                     <select name="category" id="category">
                         <option value="">-- 카테고리 선택 --</option>
                         <th:block th:each="category : ${categoryList}">
-                            <option th:value="${category.metadataCd}" th:text="${category.contents}" th:selected="${clubs.categoryCd == category.metadataCd}"></option>
+                            <option th:value="${category.metadataCd}" th:text="${category.contents}"
+                                    th:selected="${clubs.categoryCd == category.metadataCd}"></option>
                         </th:block>
                     </select>
                 </div>
@@ -73,8 +65,13 @@
             </section>
         </div>
         <script th:inline="javascript">
+            let allRegionList = [];
+            allRegionList = [[${allRegionList}]];
+            for (let i = 0; i < allRegionList.length; i++) {
+                console.log(allRegionList[i]);
+            }
+            console.log(allRegionList);
             $(document).ready(function () {
-
             });
         </script>
     </th:block>

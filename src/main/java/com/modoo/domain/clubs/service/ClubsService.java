@@ -69,6 +69,9 @@ public class ClubsService {
         return resultMap;
     }
 
+    /**
+     * 모임 상세
+     */
     public ClubsResponse getClubsDetail(Integer clubsCd) {
         Clubs clubs = clubsRepository.findById(Long.valueOf(clubsCd))
                 .orElseThrow(() -> new RuntimeException("해당 모임이 존재하지 않습니다."));
