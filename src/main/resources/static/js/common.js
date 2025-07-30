@@ -341,9 +341,10 @@ function rendersPreviews(input) {
         reader.readAsDataURL(file);
     });
 
-    input.value = ''; // 같은 파일 선택할 수 있게 초기화
+    input.value = '';
 }
 
+// 이미지 wapper 태그 삭제
 function deleteImg(el) {
     el.parentElement.remove();
 }

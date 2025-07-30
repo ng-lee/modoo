@@ -1,6 +1,8 @@
 package com.modoo.domain.clubs.controller;
 
 import com.modoo.domain.clubs.dto.request.ClubsRequest;
+import com.modoo.domain.clubs.dto.response.ClubsResponse;
+import com.modoo.domain.clubs.entity.Clubs;
 import com.modoo.domain.clubs.service.ClubsService;
 import com.modoo.domain.metadata.dto.RegionSidoDto;
 import com.modoo.domain.metadata.service.RegionService;
@@ -46,11 +48,31 @@ public class ClubsController {
      */
     @ResponseBody
     @PostMapping(value = "/api/clubs/create",  headers = ("content-type=multipart/*"))
-    public Map<String, Object> clubsCreate(@ModelAttribute ClubsRequest clubsRequest, @RequestParam("files") MultipartFile[] files, @RequestParam("mainFile") MultipartFile mainFile) {
+    public Map<String, Object> clubsCreate(@ModelAttribute ClubsRequest clubsRequest, @RequestParam(value = "files", required = false) MultipartFile[] files, @RequestParam(value = "mainFile", required = false) MultipartFile mainFile) {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap = clubsService.create(clubsRequest, files, mainFile);
         return resultMap;
     }
 
-    
+    /**
+     * 모임 생성 페이지 이동
+     */
+    @GetMapping("/clubs/detail")
+    public String detail(ModelMap modelMap, @RequestParam Integer clubsCd) {
+        // 카테고리 리스트 조회
+        List<MetaDataDto> categoryList = metaDataService.findByMetadataType(MetaDataType.CATEGORY.getType());
+        modelMap.addAttribute("categoryList", categoryList);
+        // 시도 리스트 조회
+        List<RegionSidoDto> sidoList = regionService.findAllSido();
+        modelMap.addAttribute("sidoList", sidoList);
+
+        // 모임 정보 조회
+        ClubsResponse clubsResponse = clubsService.getClubsDetail(clubsCd);
+        // 모임 정보 - region_cd 로 동 리스트 부르고
+        // 동 리스트로 얻은 sigungu_cd 로 시군구 리스트 부르고
+        // 시군구 리스트로 얻은 sido_cd 불러오기
+
+        modelMap.addAttribute("clubs", clubsResponse);
+        return "clubs/detail";
+    }
 }
