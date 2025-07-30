@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "region_sigungu")
 @Getter
@@ -27,4 +30,7 @@ public class RegionSigungu extends BaseEntity {
     @JoinColumn(name="sido_cd")
     @Comment(value = "시도 코드")
     private RegionSido sidoCd;
+
+    @OneToMany(mappedBy = "sigunguCd", fetch = FetchType.LAZY)
+    private List<RegionDong> dongList = new ArrayList<>();
 }

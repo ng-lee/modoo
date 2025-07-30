@@ -1,12 +1,11 @@
 package com.modoo.domain.metadata.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.modoo.domain.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.locationtech.jts.geom.Point;
-
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "region_dong")
@@ -24,6 +23,7 @@ public class RegionDong extends BaseEntity {
     @Comment(value = "읍면동 이름")
     private String dongName;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="sigungu_cd")
     @Comment(value = "시군구 코드")
