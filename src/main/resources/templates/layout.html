@@ -23,12 +23,51 @@
                 <div class="logo">
                     <a th:href="@{/}">modoo</a>
                 </div>
+
                 <div class="region">
-                    <button>부평구 ▼</button>
+                    <button class="region-button" id="regionButton">
+                        <span id="selectedRegionText">[[${defaultRegion.dongName}]]</span>
+                        <span class="dropdown-arrow" id="dropdownArrow">▼</span>
+                    </button>
                 </div>
+
+                <!-- 지역 선택 모달 -->
+                <div class="modal-overlay" id="modalOverlay">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-title">
+                                <div class="title-icon"></div>
+                                <span>지역</span>
+                            </div>
+                            <button class="close-button" id="closeButton">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="sido-list" id="sidoList">
+                                <!-- 시도 리스트 동적 생성 -->
+                            </div>
+                            <div class="sigungu-list" id="sigunguList">
+                                <div class="section-title">시군구</div>
+                                <div class="sigungu-grid" id="sigunguGrid">
+                                    <!-- 시군구 리스트 동적 생성 -->
+                                </div>
+                            </div>
+                            <div class="dong-list" id="dongList">
+                                <button class="back-button" id="backButton">
+                                    ← 시군구로 돌아가기
+                                </button>
+                                <div class="section-title">동/면/읍</div>
+                                <div class="dong-grid" id="dongGrid">
+                                    <!-- 동 리스트 동적 생성 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="search">
                     <input type="text" placeholder="검색어를 입력하세요"/>
                 </div>
+
                 <div class="profile">
                     <a sec:authorize="isAuthenticated()" th:href="@{/myPage}">My page</a>
                     <a sec:authorize="isAnonymous()" th:href="@{/login}">👤</a>
@@ -65,6 +104,164 @@
                     categoryListHtml += `</ul>`;
                     sidebar.append(categoryListHtml);
                 }
+
+                const regionData = [[${allRegionDtoList}]]; // 전체 시구동 리스트
+                const defaultRegion = [[${defaultRegion}]]; // 회원 or 기본 지역 정보
+
+                let selectedSidoName = defaultRegion.sidoName;
+                let selectedSigunguName = defaultRegion.sigunguName;
+                let selectedDongName = defaultRegion.dongName;
+                let selectedSidoCd = defaultRegion.sidoCd;
+                let selectedSigunguCd = defaultRegion.sigunguCd;
+                let selectedDongCd = defaultRegion.dongCd;
+
+                let currentView = 'dong'; // 'sigungu' 또는 'dong'
+
+                // DOM 요소
+                const regionButton = document.getElementById('regionButton');
+                const modalOverlay = document.getElementById('modalOverlay');
+                const closeButton = document.getElementById('closeButton');
+                const dropdownArrow = document.getElementById('dropdownArrow');
+                const selectedRegionText = document.getElementById('selectedRegionText');
+                const sidoList = document.getElementById('sidoList');
+                const sigunguList = document.getElementById('sigunguList');
+                const sigunguGrid = document.getElementById('sigunguGrid');
+                const dongList = document.getElementById('dongList');
+                const dongGrid = document.getElementById('dongGrid');
+                const backButton = document.getElementById('backButton');
+
+                // 모달 열기
+                regionButton.addEventListener('click', () => {
+                    modalOverlay.classList.add('active');
+                    regionButton.classList.add('active');
+                    dropdownArrow.classList.add('rotated');
+                    currentView = 'dong';
+                    renderModal();
+                });
+
+                // 모달 닫기
+                closeButton.addEventListener('click', closeModal);
+                modalOverlay.addEventListener('click', (e) => {
+                    if (e.target === modalOverlay) {
+                        closeModal();
+                    }
+                });
+
+                // 뒤로가기 버튼
+                backButton.addEventListener('click', () => {
+                    currentView = 'sigungu';
+                    selectedSigunguName = '';
+                    renderModal();
+                });
+
+                function closeModal() {
+                    modalOverlay.classList.remove('active');
+                    regionButton.classList.remove('active');
+                    dropdownArrow.classList.remove('rotated');
+                }
+
+                // 모달 렌더링
+                function renderModal() {
+                    renderSidoList();
+                    if (currentView === 'sigungu') {
+                        renderSigunguList();
+                        sigunguList.style.display = 'block';
+                        dongList.classList.remove('active');
+                        backButton.classList.remove('active');
+                    } else if (currentView === 'dong') {
+                        renderDongList();
+                        sigunguList.style.display = 'none';
+                        dongList.classList.add('active');
+                        backButton.classList.add('active');
+                    }
+                }
+
+                // 시도 리스트 렌더링
+                function renderSidoList() {
+                    sidoList.innerHTML = '';
+                    regionData.forEach(region => {
+                        const sidoItem = document.createElement('button');
+                        sidoItem.className = `sido-item ${selectedSidoCd === region.sidoCd ? 'active' : ''}`;
+                        sidoItem.textContent = region.sidoName;
+                        sidoItem.addEventListener('click', () => {
+                            selectedSidoName = region.sidoName;
+                            selectedSidoCd = region.sidoCd;
+                            currentView = 'sigungu';
+                            renderModal();
+                        });
+                        sidoList.appendChild(sidoItem);
+                    });
+                }
+
+                // 시군구 리스트 렌더링
+                function renderSigunguList() {
+                    const currentRegion = regionData.find(region => region.sidoCd === selectedSidoCd);
+                    sigunguGrid.innerHTML = '';
+
+                    if (currentRegion) {
+                        currentRegion.sigunguList.forEach(sigungu => {
+                            const sigunguItem = document.createElement('div');
+                            sigunguItem.className = `sigungu-item ${selectedSigunguCd === sigungu.sigunguCd ? 'selected' : ''}`;
+
+                            const nameSpan = document.createElement('span');
+                            nameSpan.className = 'sigungu-name';
+                            nameSpan.textContent = sigungu.sigunguName;
+
+                            sigunguItem.appendChild(nameSpan);
+                            sigunguItem.addEventListener('click', () => {
+                                selectedSigunguName = sigungu.sigunguName
+                                selectedSigunguCd = sigungu.sigunguCd
+                                currentView = 'dong';
+                                renderModal();
+                            });
+
+                            sigunguGrid.appendChild(sigunguItem);
+                        });
+                    }
+                }
+
+                // 동 리스트 렌더링
+                function renderDongList() {
+                    const currentRegion = regionData.find(region => region.sidoCd === selectedSidoCd);
+                    const currentSigungu = currentRegion ? currentRegion.sigunguList.find(s => s.sigunguCd === selectedSigunguCd) : null;
+                    dongGrid.innerHTML = '';
+
+                    if (currentSigungu && currentSigungu.dongList) {
+                        currentSigungu.dongList.forEach(dong => {
+                            const dongItem = document.createElement('div');
+                            dongItem.className = `dong-item${selectedDongCd === dong.dongCd ? 'selected' : ''}`;
+                            dongItem.setAttribute("data-dong-cd", dong.dongCd);
+                            dongItem.textContent = dong.dongName;
+
+                            dongItem.addEventListener('click', () => {
+                                selectedDongName = dong.dongName;
+                                selectedDongCd = dong.dongCd;
+                                updateButtonText();
+                                closeModal();
+                            });
+
+                            dongGrid.appendChild(dongItem);
+                        });
+                    }
+                }
+
+                // 버튼 텍스트 업데이트
+                function updateButtonText() {
+                    if (selectedDongName && selectedSigunguName) {
+                        selectedRegionText.textContent = `${selectedDongName}`;
+                    } else if (selectedSigunguName) {
+                        selectedRegionText.textContent = `${selectedSigunguName}`;
+                    } else if (selectedSidoName) {
+                        selectedRegionText.textContent = `${selectedSidoName}`;
+                    } else {
+                        selectedRegionText.textContent = '지역을 선택하세요';
+                    }
+
+                }
+
+                // 초기 렌더링
+                updateButtonText();
+
             </script>
         </body>
     </th:block>

@@ -25,5 +25,50 @@ h2 { font-size: 20px; margin-bottom: 10px; }
 .btn { padding: 10px 20px; border-radius: 20px; font-weight: bold; border: none; cursor: pointer; }
 .btn.cancel { background: #ddd; }
 .btn.submit { background: #b0d4f9; }
+
+/*모달*/
+.region { margin: 20px 0; }
+.region-button { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: white; border: 2px solid #e1e5e9; border-radius: 8px; cursor: pointer; font-size: 16px; color: #333; min-width: 200px; transition: all 0.2s ease; }
+.region-button:hover { border-color: #007bff; }
+.region-button.active { border-color: #007bff; box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1); }
+.dropdown-arrow { transition: transform 0.2s ease; font-size: 12px; color: #666; }
+.dropdown-arrow.rotated { transform: rotate(180deg); }
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000; }
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal-content { background: white; border-radius: 12px; width: 90%; max-width: 1000px; max-height: 100vh; overflow: hidden; transform: translateY(-20px); transition: transform 0.3s ease; }
+.modal-overlay.active .modal-content { transform: translateY(0); }
+.modal-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1px solid #e1e5e9; }
+.modal-title { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 600; color: #333; }
+.title-icon { width: 20px; height: 20px; background: #007bff; border-radius: 4px; }
+.close-button { background: none; border: none; font-size: 24px; cursor: pointer; color: #666; padding: 4px; border-radius: 4px; transition: background-color 0.2s ease; }
+.close-button:hover { background-color: #f1f3f5; }
+.modal-body { display: flex; height: 500px; }
+.sido-list { width: 200px; border-right: 1px solid #e1e5e9; overflow-y: auto; }
+.sido-item { display: block; width: 100%; padding: 12px 20px; background: none; border: none; text-align: left; cursor: pointer; font-size: 14px; color: #333; transition: background-color 0.2s ease; }
+.sido-item:hover { background-color: #f8f9fa; }
+.sido-item.active { background-color: #007bff; color: white; }
+.sigungu-list { flex: 1; overflow-y: auto; padding: 20px; }
+.sigungu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+.sigungu-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid #e1e5e9; border-radius: 6px; cursor: pointer; transition: all 0.2s ease; font-size: 14px; }
+.sigungu-item:hover { border-color: #007bff; background-color: #f8f9fa; }
+.sigungu-item.selected { border-color: #007bff; background-color: #e3f2fd; }
+.sigungu-checkbox { display: none; }
+.sigungu-name { user-select: none; }
+.dong-list { flex: 1; border-left: 1px solid #e1e5e9; overflow-y: auto; padding: 20px; display: none; }
+.dong-list.active { display: block; }
+.dong-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.dong-item { padding: 10px 12px; border: 1px solid #e1e5e9; border-radius: 6px; cursor: pointer; transition: all 0.2s ease; font-size: 14px; text-align: center; background: white; }
+.dong-item:hover { border-color: #007bff; background-color: #f8f9fa; }
+.dong-item.selected { border-color: #007bff; background-color: #007bff; color: white; }
+.section-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #333; }
+.back-button { display: none; align-items: center; gap: 8px; padding: 8px 12px; background: #f8f9fa; border: 1px solid #e1e5e9; border-radius: 6px; cursor: pointer; font-size: 14px; color: #666; margin-bottom: 16px; transition: all 0.2s ease; }
+.back-button:hover { background-color: #e9ecef; }
+.back-button.active { display: flex; }
+@media (max-width: 768px) {
+    .modal-content { width: 95%; height: 90vh; }
+    .modal-body { flex-direction: column; height: auto; }
+    .sido-list { width: 100%; border-right: none; border-bottom: 1px solid #e1e5e9; max-height: 200px; }
+}
+
 @media (max-width: 900px) { .group { width: calc(50% - 20px); } }
 @media (max-width: 600px) { .group { width: 100%; } }

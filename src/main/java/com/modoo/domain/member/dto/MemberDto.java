@@ -1,4 +1,4 @@
-package com.modoo.domain.member.dto.response;
+package com.modoo.domain.member.dto;
 
 import com.modoo.domain.member.entity.Member;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 @ToString
-public class MemberResponse {
+public class MemberDto {
 
     private Long memberCd;
     private String memberId;
@@ -18,16 +18,17 @@ public class MemberResponse {
     private String name;
     private String phone;
     private Integer categoryCd;
-    private Integer regionCd;
+    private Long regionCd;
     private Integer profile;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
-    public static MemberResponse fromEntity(Member member) {
-        return MemberResponse.builder()
+    public static MemberDto fromEntity(Member member) {
+        return MemberDto.builder()
                 .memberCd(member.getMemberCd())
                 .memberId(member.getMemberId())
                 .name(member.getName())
+                .regionCd(member.getRegion().getDongCd())
                 .build();
     }
 

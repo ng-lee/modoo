@@ -16,7 +16,7 @@ public class MainRegionDto {
 
     public static MainRegionDto from(RegionDong regionDong) {
         return MainRegionDto.builder()
-                .sidoCd(regionDong.getDongCd())
+                .sidoCd(regionDong.getSigunguCd().getSidoCd().getSidoCd())
                 .sidoName(regionDong.getDongName())
                 .sigunguCd(regionDong.getSigunguCd().getSigunguCd())
                 .sigunguName(regionDong.getSigunguCd().getSigunguName())

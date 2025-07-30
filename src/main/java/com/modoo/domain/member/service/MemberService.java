@@ -1,5 +1,6 @@
 package com.modoo.domain.member.service;
 
+import com.modoo.domain.member.dto.MemberDto;
 import com.modoo.domain.member.dto.request.MemberRequest;
 import com.modoo.domain.member.entity.Member;
 import com.modoo.domain.member.repository.MemberRepository;
@@ -62,5 +63,11 @@ public class MemberService {
            return true;
        }
        return false;
+    }
+
+    public MemberDto findByMemberCd(Long memberCd) {
+        Member member = memberRepository.findById(memberCd)
+                .orElseThrow(() -> new RuntimeException("회원이 존재하지 않습니다."));
+        return MemberDto.fromEntity(member);
     }
 }
