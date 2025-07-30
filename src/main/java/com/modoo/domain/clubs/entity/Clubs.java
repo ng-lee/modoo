@@ -35,7 +35,7 @@ public class Clubs extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_cd")
     @Comment(value = "카테고리 코드")
-    private Metadata metadata;
+    private Metadata category;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="main_file_cd")
@@ -55,7 +55,7 @@ public class Clubs extends BaseEntity {
         return Clubs.builder()
                 .name(request.getName())
                 .contents(request.getContents())
-                .metadata(metadata)
+                .category(metadata)
                 .capacity(request.getCapacity())
                 .regionDong(region)
                 .imageFile(imageFile)

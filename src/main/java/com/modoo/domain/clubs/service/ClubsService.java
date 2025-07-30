@@ -2,6 +2,7 @@ package com.modoo.domain.clubs.service;
 
 import com.modoo.domain.clubs.dto.request.ClubsFileRequest;
 import com.modoo.domain.clubs.dto.request.ClubsRequest;
+import com.modoo.domain.clubs.dto.response.ClubsResponse;
 import com.modoo.domain.clubs.entity.ClubsFile;
 import com.modoo.domain.clubs.repository.ClubsFileRepository;
 import com.modoo.domain.clubs.repository.ClubsRepository;
@@ -11,9 +12,11 @@ import com.modoo.domain.metadata.repository.MetadataRepository;
 import com.modoo.domain.metadata.repository.RegionDongRepository;
 import com.modoo.global.constant.FileType;
 import com.modoo.global.entity.ImageFile;
+import com.modoo.global.repository.ImageFileRepository;
 import com.modoo.global.service.FileService;
 import com.modoo.global.util.FileUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.modoo.domain.clubs.entity.Clubs;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ClubsService {
@@ -31,6 +35,7 @@ public class ClubsService {
     private final FileUtil fileUtil;
     private final FileService fileService;
     private final ClubsFileRepository clubsFileRepository;
+    private final ImageFileRepository imageFileRepository;
 
     /**
      * 모임 생성
@@ -62,5 +67,14 @@ public class ClubsService {
         }
 
         return resultMap;
+    }
+
+    public ClubsResponse getClubsDetail(Integer clubsCd) {
+        Clubs clubs = clubsRepository.findById(Long.valueOf(clubsCd))
+                .orElseThrow(() -> new RuntimeException("해당 모임이 존재하지 않습니다."));
+
+        ClubsResponse clubsResponse = ClubsResponse.fromEntity(clubs);
+        log.info(clubsResponse.toString());
+        return clubsResponse;
     }
 }
