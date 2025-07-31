@@ -1,5 +1,6 @@
 package com.modoo.domain.metadata.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.locationtech.jts.geom.Point;
 
@@ -25,5 +26,8 @@ public class AllRegionDto {
     public static class DongDto {
         private Long dongCd;
         private String dongName;
+
+        @JsonIgnore
+        private Point position;
     }
 }

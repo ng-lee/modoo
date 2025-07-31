@@ -4,12 +4,13 @@ import com.modoo.domain.common.entity.BaseEntity;
 import com.modoo.domain.member.dto.request.MemberRequest;
 import com.modoo.domain.metadata.entity.RegionDong;
 import com.modoo.global.entity.ImageFile;
-import com.modoo.global.util.GeometryUtil;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.locationtech.jts.geom.Point;
 
+import java.sql.Types;
 import java.time.LocalDateTime;
 
 @Entity
@@ -53,6 +54,7 @@ public class Member extends BaseEntity {
     @Comment(value = "지역 코드")
     private RegionDong region;
 
+    @JdbcTypeCode(Types.OTHER)
     @Column(columnDefinition = "geometry(Point, 4326)", nullable = false)
     @Comment("위도,경도 좌표")
     private Point position;

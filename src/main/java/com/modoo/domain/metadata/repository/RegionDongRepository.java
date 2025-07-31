@@ -13,7 +13,7 @@ public interface RegionDongRepository extends JpaRepository<RegionDong, Long> {
             select rd
             from RegionDong rd
             join fetch rd.sigunguCd
-            where rd.dongCd = :dongCd            
+            where rd.dongCd = :dongCd
             """
     )
     RegionDong getInitialRegionData(Long dongCd);

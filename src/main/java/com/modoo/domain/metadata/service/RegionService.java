@@ -68,7 +68,7 @@ public class RegionService {
                                 sido.getSigunguList().stream()
                                         .map(sigungu -> {
                                             List<AllRegionDto.DongDto> dongList = sigungu.getDongList().stream()
-                                                    .map(dong -> new AllRegionDto.DongDto(dong.getDongCd(), dong.getDongName()))
+                                                    .map(dong -> new AllRegionDto.DongDto(dong.getDongCd(), dong.getDongName(), dong.getPosition()))
                                                     .collect(Collectors.toList());
                                             return new AllRegionDto.SigunguDto(sigungu.getSigunguCd(), sigungu.getSigunguName(), dongList);
                                         })
